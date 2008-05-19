@@ -1,0 +1,12 @@
+* Prevent classes as layers
+
+Prevent the collective.testclasslayer.layer.Layer class or subclasses
+from being used as layers directly.
+
+* Factor out collective.testclasslayer.layer
+
+The collective.testclasslayer.layer module doesn't actually have
+anything to do with test cases, but I didn't want to create a separate
+package just for this one bit.  If someone wants to put this in
+zope.testing or some other common testing dependency, that would be
+great.

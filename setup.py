@@ -6,8 +6,12 @@ version = '0.1'
 setup(name='collective.testcaselayer',
       version=version,
       description="Use various test case classes as zope.testing layers",
-      long_description=open("README.txt").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read(),
+      long_description='\n'.join(
+          open(os.path.join(*path)).read() for path in [
+              ("collective", "testcaselayer", "layer.txt"),
+              ("docs", "HISTORY.txt"),
+              ("docs", "TODO.txt")
+              ]),
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Programming Language :: Python",
@@ -30,4 +34,5 @@ setup(name='collective.testcaselayer',
       entry_points="""
       # -*- Entry points: -*-
       """,
+      test_suite = "collective.testcaselayer.tests.test_suite",
       )
