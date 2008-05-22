@@ -14,10 +14,10 @@ the test cases as a layer itself.
 
 The collective.testcaselayer.ctc and collective.testcaselayer.ptc
 modules extend this support to CMFTestCase and PloneTestCase, though
-collective.testcaselayer does not depend on them itself.  As a
-consequence, there isn't any test coverage of those layers and layer
-base classes.  These layer base classes allos for use of those test
-cases' methods such as addProfile() and addProduct().
+collective.testcaselayer does not depend on them itself.  These layer
+base classes allow for use of those test cases' methods such as
+addProfile() and addProduct() see ctc.txt and ptc.txt for more
+details.
 
 Layers
 ======
@@ -28,8 +28,8 @@ layers still act like test cases with a special no-op layerOnly() test
 method to that they have functional str() and repr() values.
 
     >>> from collective.testcaselayer import ztc
-    >>> ztc.ztc_sandboxed_layer
-    <collective.testcaselayer.ztc.ZTCSandboxedLayer
+    >>> ztc.ztc_layer
+    <collective.testcaselayer.ztc.ZTCLayer
     testMethod=layerOnly>
 
 Before we set up ZopeTestCase as a layer, nothing has been set up.
@@ -38,7 +38,7 @@ Before we set up ZopeTestCase as a layer, nothing has been set up.
     >>> SecurityManagement.getSecurityManager().getUser()
     <SpecialUser 'Anonymous User'>
 
-    >>> hasattr(ztc.ztc_sandboxed_layer, 'app')
+    >>> hasattr(ztc.ztc_layer, 'app')
     False
 
     >>> from Testing import ZopeTestCase
@@ -58,8 +58,8 @@ Set up ZopeTestCase as a layer.
     >>> options = testrunner.get_options([], [])
     >>> setup_layers = {}
     >>> testrunner.setup_layer(
-    ...     options, ztc.ztc_sandboxed_layer, setup_layers)
-    Set up collective.testcaselayer.ztc.ZTCSandboxedLayer
+    ...     options, ztc.ztc_layer, setup_layers)
+    Set up collective.testcaselayer.ztc.ZTCLayer
     in ... seconds.
 
 The ZopeTestCase test fixture has been set up, but there is no logged
@@ -68,7 +68,7 @@ in user.
     >>> SecurityManagement.getSecurityManager().getUser()
     <SpecialUser 'Anonymous User'>
 
-    >>> ztc.ztc_sandboxed_layer.app.objectValues()
+    >>> ztc.ztc_layer.app.objectValues()
     [<UserFolder at /acl_users>,
      <ApplicationManager at /Control_Panel>,
      <Folder at /test_folder_1_>]
@@ -82,7 +82,7 @@ connection to the ZODB.
 Tear down the ZopeTestCase layer.
 
     >>> testrunner.tear_down_unneeded(options, [], setup_layers)
-    Tear down collective.testcaselayer.ztc.ZTCSandboxedLayer
+    Tear down collective.testcaselayer.ztc.ZTCLayer
     in ... seconds.
 
 Now everything is back to its previous state.
@@ -90,7 +90,7 @@ Now everything is back to its previous state.
     >>> SecurityManagement.getSecurityManager().getUser()
     <SpecialUser 'Anonymous User'>
 
-    >>> hasattr(ztc.ztc_sandboxed_layer, 'app')
+    >>> hasattr(ztc.ztc_layer, 'app')
     False
 
     >>> from Testing import ZopeTestCase
@@ -122,18 +122,18 @@ class.  This layer class overrides the afterSetUp() method just as
 with test cases.  The afterSetUp method here excercises the
 factilities provided by ZopeTestCase.
 
-    >>> class FooLayer(ztc.BaseZTCSandboxedLayer):
+    >>> class FooLayer(ztc.BaseZTCLayer):
     ...     def afterSetUp(self):
     ...         self.login()
     ...         self.setRoles(['Manager'])
-    >>> foo_layer = FooLayer([ztc.ztc_sandboxed_layer])
+    >>> foo_layer = FooLayer([ztc.ztc_layer])
 
 To test just the effects of this layer, set up the base layer
 separately.
 
     >>> testrunner.setup_layer(
-    ...     options, ztc.ztc_sandboxed_layer, setup_layers)
-    Set up collective.testcaselayer.ztc.ZTCSandboxedLayer
+    ...     options, ztc.ztc_layer, setup_layers)
+    Set up collective.testcaselayer.ztc.ZTCLayer
     in ... seconds.
 
 Before setting up the new layer, only the ZopeTestCase fixture is set
@@ -166,7 +166,7 @@ Now the changed made by afterSetUp() are reflected.
 Tear down just the new layer.
 
     >>> testrunner.tear_down_unneeded(
-    ...     options, [ztc.ztc_sandboxed_layer], setup_layers)
+    ...     options, [ztc.ztc_layer], setup_layers)
     Tear down FooLayer in ... seconds.
 
 Everything is restored to its previous state.

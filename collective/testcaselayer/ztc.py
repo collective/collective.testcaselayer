@@ -12,29 +12,19 @@ class TestCaseLayer(testcase.TestCaseLayer):
         super(TestCaseLayer, self)._close()
         del self.app
 
-class ZTCLayer(TestCaseLayer, ZopeTestCase.ZopeTestCase):
-    """ZopeTestCase as a layer."""
+class ZTCLayer(sandbox.Sandboxed, TestCaseLayer,
+               ZopeTestCase.ZopeTestCase):
+    """ZopeTestCase as a sandboxed layer."""
     pass
 
 ztc_layer = ZTCLayer()
 
-class ZTCSandboxedLayer(sandbox.Sandboxed, ZTCLayer):
-    """ZopeTestCase as a sandboxed layer."""
-    pass
-
-ztc_sandboxed_layer = ZTCSandboxedLayer()
-
-class PTCLayer(TestCaseLayer, ZopeTestCase.PortalTestCase):
-    """PortalTestCase as a layer."""
-    pass
-
-ptc_layer = PTCLayer()
-
-class PTCSandboxedLayer(sandbox.Sandboxed, PTCLayer):
+class PTCLayer(sandbox.Sandboxed, TestCaseLayer,
+               ZopeTestCase.PortalTestCase):
     """PortalTestCase as a sandboxed layer."""
     pass
 
-ptc_sandboxed_layer = PTCSandboxedLayer()
+ptc_layer = PTCLayer()
 
 class BaseZTCLayerMixin(object):
     """ZTC layer mixin without setting up the test fixture."""
@@ -51,17 +41,9 @@ class BasePTCLayerMixin(object):
     _configure_portal = False
 
 class BaseZTCLayer(BaseZTCLayerMixin, ZTCLayer):
-    """Layer base class with ZopeTestCase facilities."""
-    pass
-
-class BaseZTCSandboxedLayer(BaseZTCLayerMixin, ZTCSandboxedLayer):
     """Sandboxed layer base class with ZopeTestCase facilities."""
     pass
 
 class BasePTCLayer(BasePTCLayerMixin, PTCLayer):
-    """Layer base class with PortalTestCase facilities."""
-    pass
-
-class BasePTCSandboxedLayer(BasePTCLayerMixin, PTCSandboxedLayer):
     """Sandboxed layer base class with PortalTestCase facilities."""
     pass

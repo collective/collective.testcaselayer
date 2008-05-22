@@ -20,7 +20,7 @@ tear down any changes made by the layer that won't be cleaned up by
 restoring the ZODB.
 
     >>> from collective.testcaselayer import ztc
-    >>> class FooLayer(ztc.BaseZTCSandboxedLayer):
+    >>> class FooLayer(ztc.BaseZTCLayer):
     ...     def afterSetUp(self):
     ...         self.app.foo = 'foo'
     >>> foo_layer = FooLayer()
@@ -45,7 +45,7 @@ ZODB.
 
 Create a sandboxed layer that uses the first layer as a base layer.
 
-    >>> class BarLayer(ztc.BaseZTCSandboxedLayer):
+    >>> class BarLayer(ztc.BaseZTCLayer):
     ...     def afterSetUp(self):
     ...         self.app.bar = 'bar'
     >>> bar_layer = BarLayer([foo_layer])
