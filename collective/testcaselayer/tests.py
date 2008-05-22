@@ -8,6 +8,7 @@ optionflags = (doctest.NORMALIZE_WHITESPACE|
 def test_suite():
     return doctest.DocFileSuite(
         'layer.txt',
+        'sandbox.txt',
         optionflags=optionflags)
 
 if __name__ == '__main__':
