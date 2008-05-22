@@ -18,8 +18,8 @@ to group layers together into one layer.
 
     >>> from collective.testcaselayer import layer
 
-Layer Base Classes
-==================
+Layer Classes
+=============
 
 Use the collective.testcaselayer.layer.Layer class to create your own
 layer classes.
@@ -30,6 +30,7 @@ layer classes.
 The instances of the class will be your actual zope.testing layer.
 
     >>> foo_layer = FooLayer()
+
     >>> from zope.testing import testrunner
     >>> options = testrunner.get_options([], [])
     >>> testrunner.setup_layer(options, foo_layer, {})
