@@ -29,8 +29,7 @@ method to that they have functional str() and repr() values.
 
     >>> from collective.testcaselayer import ztc
     >>> ztc.ztc_layer
-    <collective.testcaselayer.ztc.ZTCLayer
-    testMethod=layerOnly>
+    <collective.testcaselayer.ztc.ZTCLayer testMethod=layerOnly>
 
 Before we set up ZopeTestCase as a layer, nothing has been set up.
 
@@ -59,8 +58,7 @@ Set up ZopeTestCase as a layer.
     >>> setup_layers = {}
     >>> testrunner.setup_layer(
     ...     options, ztc.ztc_layer, setup_layers)
-    Set up collective.testcaselayer.ztc.ZTCLayer
-    in ... seconds.
+    Set up collective.testcaselayer.ztc.ZTCLayer in ... seconds.
 
 The ZopeTestCase test fixture has been set up, but there is no logged
 in user.
@@ -82,8 +80,7 @@ connection to the ZODB.
 Tear down the ZopeTestCase layer.
 
     >>> testrunner.tear_down_unneeded(options, [], setup_layers)
-    Tear down collective.testcaselayer.ztc.ZTCLayer
-    in ... seconds.
+    Tear down collective.testcaselayer.ztc.ZTCLayer in ... seconds.
 
 Now everything is back to its previous state.
 
@@ -133,8 +130,7 @@ separately.
 
     >>> testrunner.setup_layer(
     ...     options, ztc.ztc_layer, setup_layers)
-    Set up collective.testcaselayer.ztc.ZTCLayer
-    in ... seconds.
+    Set up collective.testcaselayer.ztc.ZTCLayer in ... seconds.
 
 Before setting up the new layer, only the ZopeTestCase fixture is set
 up.
