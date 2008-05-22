@@ -1,4 +1,4 @@
 Introduction
 ============
 
-see collective/testcaselayer/README.txt
+see ztc.txt, sandbox.txt, and layer.txt in collective/testcaselayer/.

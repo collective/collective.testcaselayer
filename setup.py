@@ -9,6 +9,8 @@ setup(name='collective.testcaselayer',
       long_description='\n'.join(
           open(os.path.join(*path)).read() for path in [
               ("collective", "testcaselayer", "layer.txt"),
+              ("collective", "testcaselayer", "sandbox.txt"),
+              ("collective", "testcaselayer", "ztcx.txt"),
               ("docs", "HISTORY.txt"),
               ("docs", "TODO.txt")
               ]),
