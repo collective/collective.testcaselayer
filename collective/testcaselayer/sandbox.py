@@ -31,3 +31,25 @@ class Sandboxed(object):
         result = super(Sandboxed, self).setUp()
         transaction.commit()
         return result
+
+# XXX Untested
+def committer(method):
+    """A decorator for methods that commit changes to the app."""
+
+    def __call__(self, *args, **kw):
+        self.app = ZopeTestCase.app()
+        try:
+            transaction.begin()
+            try:
+                result = method(*args, **kw)
+            except:
+                transaction.abort()
+                raise
+            else:
+                transaction.commit()
+            return result
+        finally:
+            ZopeTestCase.close(self.app)
+            del self.app
+
+    return __call__
