@@ -58,7 +58,11 @@ The CMFTestCase test fixture has been set up.
 
 Tear down the CMFTestCase layer.
 
-    >>> testrunner.tear_down_unneeded(options, [cmfsite_layer], setup_layers)
+    >>> testrunner.tear_down_unneeded(
+    ...     options,
+    ...     [layer for layer in setup_layers
+    ...      if layer is not ctc.ctc_layer],
+    ...     setup_layers)
     Tear down collective.testcaselayer.ctc.CTCLayer in ... seconds.
 
 The CMFTestCase test fixture is no longer set up.
@@ -78,20 +82,26 @@ the CMFTestCase layer base class.
 
     >>> class FooLayer(ctc.BaseCTCLayer):
     ...     def afterSetUp(self):
-    ...         self.addProfile('collective.testcaselayer:testing')
+    ...         self.addProfile(
+    ...             'Products.CMFDefault:sample_content')
     ...         self.addProduct('CollectiveTestCaseLayerTesting')
     ...         self.loginAsPortalOwner()
-    >>> foo_layer = FooLayer([cmfsite_layer])
+
+This layer depends on the profile and product added which are set up
+in a testing only layer.
+
+    >>> from collective.testcaselayer.testing import layer
+    >>> foo_layer = FooLayer([layer.cmf_layer, cmfsite_layer])
 
 The FooLayer test fixture has not been set up.
 
     >>> app = ZopeTestCase.app()
     >>> portal = getattr(app, cmf_ctc.portal_name)
 
-    >>> portal._installed_profiles
-    {}
-    >>> portal._installed_products
-    {}
+    >>> hasattr(portal, 'subfolder')
+    False
+    >>> hasattr(portal, 'foo')
+    False
 
     >>> from AccessControl import SecurityManagement
     >>> SecurityManagement.getSecurityManager().getUser()
@@ -102,6 +112,8 @@ The FooLayer test fixture has not been set up.
 Set up the FooLayer.
 
     >>> testrunner.setup_layer(options, foo_layer, setup_layers)
+    Set up collective.testcaselayer.testing.layer.CMFLayer
+    in ... seconds.
     Set up FooLayer in ... seconds.
 
 The FooLayer test fixture has been set up.
@@ -109,10 +121,10 @@ The FooLayer test fixture has been set up.
     >>> app = ZopeTestCase.app()
     >>> portal = getattr(app, cmf_ctc.portal_name)
 
-    >>> portal._installed_profiles
-    {'collective.testcaselayer:testing': 1}
-    >>> portal._installed_products
-    {'CollectiveTestCaseLayerTesting': 1}
+    >>> portal.subfolder
+    <PortalFolder at /cmf/subfolder>
+    >>> portal.foo
+    'foo'
 
     >>> from AccessControl import SecurityManagement
     >>> SecurityManagement.getSecurityManager().getUser()
@@ -122,7 +134,11 @@ The FooLayer test fixture has been set up.
 
 Tear down the FooLayer.
 
-    >>> testrunner.tear_down_unneeded(options, [cmfsite_layer], setup_layers)
+    >>> testrunner.tear_down_unneeded(
+    ...     options,
+    ...     [layer for layer in setup_layers
+    ...      if layer is not foo_layer],
+    ...     setup_layers)
     Tear down FooLayer in ... seconds.
 
 The FooLayer test fixture is no longer set up.
@@ -130,10 +146,10 @@ The FooLayer test fixture is no longer set up.
     >>> app = ZopeTestCase.app()
     >>> portal = getattr(app, cmf_ctc.portal_name)
 
-    >>> portal._installed_profiles
-    {}
-    >>> portal._installed_products
-    {}
+    >>> hasattr(portal, 'subfolder')
+    False
+    >>> hasattr(portal, 'foo')
+    False
 
     >>> from AccessControl import SecurityManagement
     >>> SecurityManagement.getSecurityManager().getUser()
@@ -144,5 +160,7 @@ The FooLayer test fixture is no longer set up.
 Finish tearing down the rest of the layers.
 
     >>> testrunner.tear_down_unneeded(options, [], setup_layers)
+    Tear down collective.testcaselayer.testing.layer.CMFLayer
+    in ... seconds.
     Tear down Products.CMFTestCase.layer.CMFSite in ... seconds.
     Tear down Products.CMFTestCase.layer.ZCML in ... seconds.
