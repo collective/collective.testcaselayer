@@ -2,7 +2,7 @@ from Testing import ZopeTestCase
 
 from collective.testcaselayer import testcase, sandbox
 
-class TestCaseLayer(testcase.TestCaseLayer):
+class TestCaseLayer(sandbox.Sandboxed, testcase.TestCaseLayer):
 
     def _setup(self):
         super(TestCaseLayer, self)._setup()
@@ -12,15 +12,13 @@ class TestCaseLayer(testcase.TestCaseLayer):
         super(TestCaseLayer, self)._close()
         del self.app
 
-class ZTCLayer(sandbox.Sandboxed, TestCaseLayer,
-               ZopeTestCase.ZopeTestCase):
+class ZTCLayer(TestCaseLayer, ZopeTestCase.ZopeTestCase):
     """ZopeTestCase as a sandboxed layer."""
     pass
 
 ztc_layer = ZTCLayer()
 
-class PTCLayer(sandbox.Sandboxed, TestCaseLayer,
-               ZopeTestCase.PortalTestCase):
+class PTCLayer(TestCaseLayer, ZopeTestCase.PortalTestCase):
     """PortalTestCase as a sandboxed layer."""
     pass
 
