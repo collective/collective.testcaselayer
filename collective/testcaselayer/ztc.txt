@@ -56,8 +56,7 @@ Set up ZopeTestCase as a layer.
     >>> from zope.testing import testrunner
     >>> options = testrunner.get_options([], [])
     >>> setup_layers = {}
-    >>> testrunner.setup_layer(
-    ...     options, ztc.ztc_layer, setup_layers)
+    >>> testrunner.setup_layer(options, ztc.ztc_layer, setup_layers)
     Set up collective.testcaselayer.ztc.ZTCLayer in ... seconds.
 
 The ZopeTestCase test fixture has been set up, but there is no logged
@@ -125,11 +124,10 @@ factilities provided by ZopeTestCase.
     ...         self.setRoles(['Manager'])
     >>> foo_layer = FooLayer([ztc.ztc_layer])
 
-To test just the effects of this layer, set up the base layer
+To test the effects of just this layer, set up the base layer
 separately.
 
-    >>> testrunner.setup_layer(
-    ...     options, ztc.ztc_layer, setup_layers)
+    >>> testrunner.setup_layer(options, ztc.ztc_layer, setup_layers)
     Set up collective.testcaselayer.ztc.ZTCLayer in ... seconds.
 
 Before setting up the new layer, only the ZopeTestCase fixture is set
@@ -176,3 +174,8 @@ Everything is restored to its previous state.
     >>> user.getRoles()
     ('test_role_1_', 'Authenticated')
     >>> ZopeTestCase.close(app)
+
+Finish tearing down the rest of the layers.
+
+    >>> testrunner.tear_down_unneeded(options, [], setup_layers)
+    Tear down collective.testcaselayer.ztc.ZTCLayer in ... seconds.
