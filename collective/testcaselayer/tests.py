@@ -10,6 +10,7 @@ def test_suite():
         'layer.txt',
         'sandbox.txt',
         'ztc.txt',
+        'ctc.txt',
         optionflags=optionflags)
 
 if __name__ == '__main__':
