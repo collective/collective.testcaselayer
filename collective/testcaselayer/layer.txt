@@ -3,13 +3,16 @@ collective.testcaselayer.layer
 ==============================
 
 In many cases, classes can be used as layers themselves where the base
-classes are used as the base layers.  In some use cases, however, this
-becomes cumbersome.  Specifically, there is often need to reuse layer
-code but if classes are layers then there are a number of problems
-using class heirarchy for reuse.  For example, all layer methods
-(setUp, tearDown, testSetUp, and testTearDown) must be defined on
-class layers with base classes to avoid accidentally running the
-method of a base class/layer at the wrong time.
+classes are used as the base layers.  This means that the layer
+inheritance herirarchy, used for code factoring and re-use, becomes
+bound to the layer set up heirachy, used to determine which layers are
+set up when and for which tests.  IOW, it is not possible for a layer
+to subclass another layer *just* to re-use functionality without also
+depending on that layer being set up as well.  Additionally, when
+using classes as layers, all layer methods (setUp, tearDown,
+testSetUp, and testTearDown) must be defined on class layers with base
+classes to avoid accidentally running the method of a base class/layer
+at the wrong time.
 
 The collective.testcaselayer.layer module provides a Layer class
 intended to be used as a base class for classes whoss instances will
