@@ -5,12 +5,14 @@ version = '0.1'
 
 setup(name='collective.testcaselayer',
       version=version,
-      description="Use various test case classes as zope.testing layers",
+      description="Use test case classes as zope.testing layers",
       long_description='\n'.join(
           open(os.path.join(*path)).read() for path in [
+              ("collective", "testcaselayer", "README.txt"),
+              ("collective", "testcaselayer", "ptc.txt"),
+              ("collective", "testcaselayer", "ztc.txt"),
               ("collective", "testcaselayer", "layer.txt"),
               ("collective", "testcaselayer", "sandbox.txt"),
-              ("collective", "testcaselayer", "ztcx.txt"),
               ("docs", "HISTORY.txt"),
               ("docs", "TODO.txt")
               ]),
