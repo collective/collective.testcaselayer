@@ -11,6 +11,7 @@ def test_suite():
         'sandbox.txt',
         'ztc.txt',
         'ctc.txt',
+        'ptc.txt',
         optionflags=optionflags)
 
 if __name__ == '__main__':
