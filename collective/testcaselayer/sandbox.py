@@ -13,9 +13,11 @@ class Sandboxed(object):
 
     def _app(self):
         self.orig_bobo_application = Zope2.bobo_application
+        self.orig_db = Zope2.DB
         db, name, version_cookie_name = (
             self.orig_bobo_application._stuff)
         sandboxed_db = ZopeTestCase.Zope2.sandbox(db)
+        Zope2.DB = sandboxed_db
         Zope2.bobo_application = ZApplication.ZApplicationWrapper(
             sandboxed_db, name,
             klass=self.orig_bobo_application._klass,
@@ -23,6 +25,7 @@ class Sandboxed(object):
         return super(Sandboxed, self)._app()
 
     def _close(self):
+        Zope2.DB = self.orig_db
         Zope2.bobo_application = self.orig_bobo_application
         return super(Sandboxed, self)._close()
     

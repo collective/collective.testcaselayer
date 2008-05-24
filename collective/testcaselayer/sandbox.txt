@@ -71,6 +71,19 @@ layers.
     'bar'
     >>> ZopeTestCase.close(app)
 
+Any test case using Testing.ZopeTestCase.sandbox.Sandboxed, such as
+zope.testbrowser tests run against Zope2, calls the ZopeLite.sandbox()
+function without any arguments.  In such cases, the resulting per-test
+sandboxed ZODB will still be based on the layer sandboxed ZODB.
+
+    >>> app = ZopeTestCase.Zope2.app(
+    ...     ZopeTestCase.Zope2.sandbox().open())
+    >>> getattr(app, 'foo', None)
+    'foo'
+    >>> getattr(app, 'bar', None)
+    'bar'
+    >>> app._p_jar.close()
+
 After the sub-layer is torn down, the ZODB reflects only the changes
 from the base layer.
 
