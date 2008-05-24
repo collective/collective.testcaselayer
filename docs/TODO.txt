@@ -1,7 +1,5 @@
-* Prevent classes as layers
-
-Prevent the collective.testclasslayer.layer.Layer class or subclasses
-from being used as layers directly.
+TODO
+====
 
 * Factor out collective.testclasslayer.layer
 
@@ -16,4 +14,6 @@ great.
 It might be appropriate to refactor out the ZTC specific pieces of the
 test cases in the Testing.ZopeTestCase package such that there is a
 common base class that doesn't subclass unittest.TestCase.  With this
-in place we could do away with collective.testcaselayer.testcase.
+in place we could do away with collective.testcaselayer.testcase and
+have common base classes that could be used either as layers or as
+test cases.

@@ -113,10 +113,10 @@ sets _setup_fixture (or _configure_portal for PortalTestCase) to True.
 Best practice should be to instantiate any layers depending on the ZTC
 test fixture with the ZTCLayer as a base layer as above.
 
-Create a layer class that subclasses the appropriate base layer
-class.  This layer class overrides the afterSetUp() method just as
-with test cases.  The afterSetUp method here excercises the
-factilities provided by ZopeTestCase.
+Create a layer class that subclasses the appropriate base layer class.
+This layer class overrides the afterSetUp() method just as with
+ZopeTestCase based test cases.  The afterSetUp method here excercises
+the factilities provided by ZopeTestCase.
 
     >>> class FooLayer(ztc.BaseZTCLayer):
     ...     def afterSetUp(self):
