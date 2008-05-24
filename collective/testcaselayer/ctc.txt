@@ -91,7 +91,7 @@ This layer depends on the profile and product added which are set up
 in a testing only layer.
 
     >>> from collective.testcaselayer.testing import layer
-    >>> foo_layer = FooLayer([layer.cmf_layer, cmfsite_layer])
+    >>> foo_layer = FooLayer([layer.product_layer, cmfsite_layer])
 
 The FooLayer test fixture has not been set up.
 
@@ -112,7 +112,7 @@ The FooLayer test fixture has not been set up.
 Set up the FooLayer.
 
     >>> testrunner.setup_layer(options, foo_layer, setup_layers)
-    Set up collective.testcaselayer.testing.layer.CMFLayer
+    Set up collective.testcaselayer.testing.layer.ProductLayer
     in ... seconds.
     Set up FooLayer in ... seconds.
 
@@ -160,7 +160,7 @@ The FooLayer test fixture is no longer set up.
 Finish tearing down the rest of the layers.
 
     >>> testrunner.tear_down_unneeded(options, [], setup_layers)
-    Tear down collective.testcaselayer.testing.layer.CMFLayer
+    Tear down collective.testcaselayer.testing.layer.ProductLayer
     in ... seconds.
     Tear down Products.CMFTestCase.layer.CMFSite in ... seconds.
     Tear down Products.CMFTestCase.layer.ZCML in ... seconds.
