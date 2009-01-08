@@ -1,9 +1,11 @@
 Changelog
 =========
 
-0.2 - Unreleased
+0.2 - 2008-01-08
 ----------------
 
+* Make the self.folder attribute available in PortalTestCase
+  sub-layers
 * Make tests compatible with zope.testing.testrunner refactoring
 
 0.1 - 2008-05-23
