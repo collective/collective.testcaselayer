@@ -1,3 +1,5 @@
+.. -*-doctest-*-
+
 ============================
 collective.testcaselayer.ztc
 ============================
@@ -53,10 +55,14 @@ Before we set up ZopeTestCase as a layer, nothing has been set up.
 
 Set up ZopeTestCase as a layer.
 
-    >>> from zope.testing import testrunner
-    >>> options = testrunner.get_options([], [])
+    >>> try:
+    ...     from zope.testing.testrunner import runner
+    ... except ImportError:
+    ...     from zope.testing import testrunner as runner
+
+    >>> options = runner.get_options([], [])
     >>> setup_layers = {}
-    >>> testrunner.setup_layer(options, ztc.ztc_layer, setup_layers)
+    >>> runner.setup_layer(options, ztc.ztc_layer, setup_layers)
     Set up collective.testcaselayer.ztc.ZTCLayer in ... seconds.
 
 The ZopeTestCase test fixture has been set up, but there is no logged
@@ -78,7 +84,7 @@ connection to the ZODB.
 
 Tear down the ZopeTestCase layer.
 
-    >>> testrunner.tear_down_unneeded(options, [], setup_layers)
+    >>> runner.tear_down_unneeded(options, [], setup_layers)
     Tear down collective.testcaselayer.ztc.ZTCLayer in ... seconds.
 
 Now everything is back to its previous state.
@@ -127,7 +133,7 @@ the factilities provided by ZopeTestCase.
 To test the effects of just this layer, set up the base layer
 separately.
 
-    >>> testrunner.setup_layer(options, ztc.ztc_layer, setup_layers)
+    >>> runner.setup_layer(options, ztc.ztc_layer, setup_layers)
     Set up collective.testcaselayer.ztc.ZTCLayer in ... seconds.
 
 Before setting up the new layer, only the ZopeTestCase fixture is set
@@ -145,7 +151,7 @@ up.
 
 Set up the new layer.
 
-    >>> testrunner.setup_layer(options, foo_layer, setup_layers)
+    >>> runner.setup_layer(options, foo_layer, setup_layers)
     Set up FooLayer in ... seconds.
 
 Now the changed made by afterSetUp() are reflected.
@@ -159,7 +165,7 @@ Now the changed made by afterSetUp() are reflected.
 
 Tear down just the new layer.
 
-    >>> testrunner.tear_down_unneeded(
+    >>> runner.tear_down_unneeded(
     ...     options, [ztc.ztc_layer], setup_layers)
     Tear down FooLayer in ... seconds.
 
@@ -177,5 +183,5 @@ Everything is restored to its previous state.
 
 Finish tearing down the rest of the layers.
 
-    >>> testrunner.tear_down_unneeded(options, [], setup_layers)
+    >>> runner.tear_down_unneeded(options, [], setup_layers)
     Tear down collective.testcaselayer.ztc.ZTCLayer in ... seconds.

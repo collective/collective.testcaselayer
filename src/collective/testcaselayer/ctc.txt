@@ -1,3 +1,5 @@
+.. -*-doctest-*-
+
 ============================
 collective.testcaselayer.ctc
 ============================
@@ -21,13 +23,17 @@ To test the effects of just this layer, set up the base layer
 separately.  Because of the way CMFTestCase uses layers, we must first
 call the setupCMFSite() function.
 
-    >>> from zope.testing import testrunner
+    >>> try:
+    ...     from zope.testing.testrunner import runner
+    ... except ImportError:
+    ...     from zope.testing import testrunner as runner
+
     >>> from Products.CMFTestCase import ctc as cmf_ctc
     >>> cmf_ctc.setupCMFSite()
     >>> cmfsite_layer, = ctc.ctc_layer.__bases__
-    >>> options = testrunner.get_options([], [])
+    >>> options = runner.get_options([], [])
     >>> setup_layers = {}
-    >>> testrunner.setup_layer(options, cmfsite_layer, setup_layers)
+    >>> runner.setup_layer(options, cmfsite_layer, setup_layers)
     Set up Products.CMFTestCase.layer.ZCML in ... seconds.
     Set up Products.CMFTestCase.layer.CMFSite in ... seconds.
 
@@ -43,7 +49,7 @@ The CMFTestCase test fixture has not been set up.
 
 Set up the CMFTestCase layer.
 
-    >>> testrunner.setup_layer(options, ctc.ctc_layer, setup_layers)
+    >>> runner.setup_layer(options, ctc.ctc_layer, setup_layers)
     Set up collective.testcaselayer.ctc.CTCLayer in ... seconds.
 
 The CMFTestCase test fixture has been set up.
@@ -58,7 +64,7 @@ The CMFTestCase test fixture has been set up.
 
 Tear down the CMFTestCase layer.
 
-    >>> testrunner.tear_down_unneeded(
+    >>> runner.tear_down_unneeded(
     ...     options,
     ...     [layer for layer in setup_layers
     ...      if layer is not ctc.ctc_layer],
@@ -111,7 +117,7 @@ The FooLayer test fixture has not been set up.
 
 Set up the FooLayer.
 
-    >>> testrunner.setup_layer(options, foo_layer, setup_layers)
+    >>> runner.setup_layer(options, foo_layer, setup_layers)
     Set up collective.testcaselayer.testing.layer.ProductLayer
     in ... seconds.
     Set up FooLayer in ... seconds.
@@ -134,7 +140,7 @@ The FooLayer test fixture has been set up.
 
 Tear down the FooLayer.
 
-    >>> testrunner.tear_down_unneeded(
+    >>> runner.tear_down_unneeded(
     ...     options,
     ...     [layer for layer in setup_layers
     ...      if layer is not foo_layer],
@@ -159,7 +165,7 @@ The FooLayer test fixture is no longer set up.
 
 Finish tearing down the rest of the layers.
 
-    >>> testrunner.tear_down_unneeded(options, [], setup_layers)
+    >>> runner.tear_down_unneeded(options, [], setup_layers)
     Tear down collective.testcaselayer.testing.layer.ProductLayer
     in ... seconds.
     Tear down Products.CMFTestCase.layer.CMFSite in ... seconds.

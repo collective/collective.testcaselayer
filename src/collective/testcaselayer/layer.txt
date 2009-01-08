@@ -1,3 +1,5 @@
+.. -*-doctest-*-
+
 ==============================
 collective.testcaselayer.layer
 ==============================
@@ -34,9 +36,13 @@ The instances of the class will be your actual zope.testing layer.
 
     >>> foo_layer = FooLayer()
 
-    >>> from zope.testing import testrunner
-    >>> options = testrunner.get_options([], [])
-    >>> testrunner.setup_layer(options, foo_layer, {})
+    >>> try:
+    ...     from zope.testing.testrunner import runner
+    ... except ImportError:
+    ...     from zope.testing import testrunner as runner
+
+    >>> options = runner.get_options([], [])
+    >>> runner.setup_layer(options, foo_layer, {})
     Set up FooLayer running FooLayer.setUp
     in ... seconds.
 
@@ -47,7 +53,7 @@ will treat the Layer base class as a layer itself and will set it up
 which is meaningless.  Further, it will try to call the setUp method
 as a class method which will raise an error.
 
-    >>> testrunner.setup_layer(options, FooLayer, {})
+    >>> runner.setup_layer(options, FooLayer, {})
     Traceback (most recent call last):
     TypeError: unbound method setUp() must be called with FooLayer instance as first argument (got nothing instead)
 
@@ -68,7 +74,7 @@ Create the new layer that uses foo_layer as a base layer.
 
 Set up the layers.
 
-    >>> testrunner.setup_layer(options, bar_layer, {})
+    >>> runner.setup_layer(options, bar_layer, {})
     Set up FooLayer running FooLayer.setUp
     in ... seconds.
     Set up BarLayer running BarLayer.setUp
@@ -95,7 +101,7 @@ Instantiate the Layer class with the base layers, a module, and a name.
 
 Set up the layers.
 
-    >>> testrunner.setup_layer(options, qux_layer, {})
+    >>> runner.setup_layer(options, qux_layer, {})
     Set up FooLayer running FooLayer.setUp
     in ... seconds.
     Set up BarLayer running BarLayer.setUp
@@ -123,5 +129,5 @@ the module name from the calling frame is used.
 
     >>> __name__ = 'BahModule'
     >>> quux_layer = layer.Layer([], name='QuuxLayer')
-    >>> testrunner.setup_layer(options, quux_layer, {})
+    >>> runner.setup_layer(options, quux_layer, {})
     Set up BahModule.QuuxLayer in ... seconds.
