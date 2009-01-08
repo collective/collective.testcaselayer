@@ -38,5 +38,5 @@ setup(name='collective.testcaselayer',
       entry_points="""
       # -*- Entry points: -*-
       """,
-      test_suite = "collective.testcaselayer.tests.test_suite",
+      test_suite="collective.testcaselayer.tests.test_suite",
       )
