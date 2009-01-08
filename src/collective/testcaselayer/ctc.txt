@@ -97,7 +97,7 @@ This layer depends on the profile and product added which are set up
 in a testing only layer.
 
     >>> from collective.testcaselayer.testing import layer
-    >>> foo_layer = FooLayer([layer.product_layer, cmfsite_layer])
+    >>> foo_layer = FooLayer([layer.product_layer, ctc.ctc_layer])
 
 The FooLayer test fixture has not been set up.
 
@@ -137,6 +137,11 @@ The FooLayer test fixture has been set up.
     <User 'portal_owner'>
 
     >>> ZopeTestCase.close(app)
+
+The convenience attributes of the PortalTestCase are available.
+
+    >>> foo_layer.folder
+    <PortalFolder at /cmf/Members/test_user_1_>
 
 Tear down the FooLayer.
 

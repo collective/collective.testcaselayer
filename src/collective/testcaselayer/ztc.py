@@ -38,6 +38,11 @@ class BasePTCLayerMixin(object):
 
     _configure_portal = False
 
+    @property
+    def folder(self):
+        return self.portal.portal_membership.getHomeFolder(
+            ZopeTestCase.user_name)
+
 class BaseZTCLayer(BaseZTCLayerMixin, ZTCLayer):
     """Sandboxed layer base class with ZopeTestCase facilities."""
     pass
