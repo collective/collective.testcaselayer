@@ -24,7 +24,8 @@ class Sandboxed(object):
             version_cookie_name=version_cookie_name)
         return super(Sandboxed, self)._app()
 
-    _getNewDB = ZopeTestCase.Zope2.sandbox
+    def _getNewDB(self, db):
+        return ZopeTestCase.Zope2.sandbox(db)
 
     def _close(self):
         Zope2.DB = self.orig_db
