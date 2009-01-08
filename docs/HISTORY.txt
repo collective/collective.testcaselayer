@@ -4,6 +4,8 @@ Changelog
 0.2 - Unreleased
 ----------------
 
+* Make tests compatible with zope.testing.testrunner refactoring
+
 0.1 - 2008-05-23
 ----------------
 
