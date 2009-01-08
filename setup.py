@@ -3,16 +3,18 @@ import os
 
 version = '0.2'
 
+src_path = ("src", "collective", "testcaselayer")
+
 setup(name='collective.testcaselayer',
       version=version,
       description="Use test cases as zope.testing layers",
       long_description='\n'.join(
           open(os.path.join(*path)).read() for path in [
-              ("collective", "testcaselayer", "README.txt"),
-              ("collective", "testcaselayer", "ptc.txt"),
-              ("collective", "testcaselayer", "ztc.txt"),
-              ("collective", "testcaselayer", "layer.txt"),
-              ("collective", "testcaselayer", "sandbox.txt"),
+              src_path + ("README.txt",),
+              src_path + ("ptc.txt",),
+              src_path + ("ztc.txt",),
+              src_path + ("layer.txt",),
+              src_path + ("sandbox.txt",),
               ("docs", "HISTORY.txt"),
               ("docs", "TODO.txt")
               ]),
@@ -26,7 +28,8 @@ setup(name='collective.testcaselayer',
       author_email='me@rpatterson.net',
       url='http://pypi.python.org/pypi/collective.testcaselayer',
       license='GPL',
-      packages=find_packages(exclude=['ez_setup']),
+      packages=find_packages('src', exclude=['ez_setup']),
+      package_dir = {'':'src'},
       namespace_packages=['collective'],
       include_package_data=True,
       zip_safe=False,
