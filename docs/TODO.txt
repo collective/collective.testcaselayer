@@ -1,6 +1,8 @@
 TODO
 ====
 
+* Add convenience method for loading ZCML. (witsch)
+
 * Factor out collective.testclasslayer.layer
 
 The collective.testclasslayer.layer module doesn't actually have
