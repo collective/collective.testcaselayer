@@ -4,6 +4,8 @@ Changelog
 0.3 - Unreleased
 ----------------
 
+* Deprecate zope.testing<3.6 support
+
 * The collective.testcaselayer.ptc module needs to call
   ptc.setupPloneSite() in order to make sure the plone site exists
 
