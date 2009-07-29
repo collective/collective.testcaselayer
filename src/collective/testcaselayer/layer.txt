@@ -36,11 +36,7 @@ The instances of the class will be your actual zope.testing layer.
 
     >>> foo_layer = FooLayer()
 
-    >>> try:
-    ...     from zope.testing.testrunner import runner
-    ... except ImportError:
-    ...     from zope.testing import testrunner as runner
-
+    >>> from zope.testing.testrunner import runner
     >>> options = runner.get_options([], [])
     >>> runner.setup_layer(options, foo_layer, {})
     Set up FooLayer running FooLayer.setUp

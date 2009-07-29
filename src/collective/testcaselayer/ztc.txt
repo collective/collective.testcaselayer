@@ -55,11 +55,7 @@ Before we set up ZopeTestCase as a layer, nothing has been set up.
 
 Set up ZopeTestCase as a layer.
 
-    >>> try:
-    ...     from zope.testing.testrunner import runner
-    ... except ImportError:
-    ...     from zope.testing import testrunner as runner
-
+    >>> from zope.testing.testrunner import runner
     >>> options = runner.get_options([], [])
     >>> setup_layers = {}
     >>> runner.setup_layer(options, ztc.ztc_layer, setup_layers)

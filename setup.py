@@ -36,7 +36,7 @@ setup(name='collective.testcaselayer',
       install_requires=[
           'setuptools',
           # -*- Extra requirements: -*-
-          'zope.testing',
+          'zope.testing>=3.6dev',
       ],
       entry_points="""
       # -*- Entry points: -*-

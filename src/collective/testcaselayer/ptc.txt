@@ -23,11 +23,7 @@ To test the effects of just this layer, set up the base layer
 separately.  Because of the way PloneTestCase uses layers, we must first
 call the setupPloneSite() function.
 
-    >>> try:
-    ...     from zope.testing.testrunner import runner
-    ... except ImportError:
-    ...     from zope.testing import testrunner as runner
-
+    >>> from zope.testing.testrunner import runner
     >>> from Products.PloneTestCase import ptc as plone_ptc
     >>> plone_ptc.setupPloneSite()
     >>> plonesite_layer, = ptc.ptc_layer.__bases__

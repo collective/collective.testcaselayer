@@ -23,11 +23,7 @@ To test the effects of just this layer, set up the base layer
 separately.  Because of the way CMFTestCase uses layers, we must first
 call the setupCMFSite() function.
 
-    >>> try:
-    ...     from zope.testing.testrunner import runner
-    ... except ImportError:
-    ...     from zope.testing import testrunner as runner
-
+    >>> from zope.testing.testrunner import runner
     >>> from Products.CMFTestCase import ctc as cmf_ctc
     >>> cmf_ctc.setupCMFSite()
     >>> cmfsite_layer, = ctc.ctc_layer.__bases__
