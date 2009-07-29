@@ -1,3 +1,5 @@
+.. -*-doctest-*-
+
 ========================
 collective.testcaselayer
 ========================
@@ -7,6 +9,56 @@ amount of time consumed during test driven development by sharing
 expensive test fixtures, such as is often requires for functional
 test.  This package provides several well tested facilities to make
 writing and using layers faster and easier.
+
+Quick Start
+===========
+
+For a simple testing layer which installs a collective namespace
+package into Zope and installs it's GenericSetup profile into the
+PloneTestCase Plone site, you could use a collective.foo.testing
+module like this:
+
+    >>> from Products.PloneTestCase import ptc
+    >>> 
+    >>> from collective.testcaselayer import ptc as tcl_ptc
+    >>> 
+    >>> class Layer(tcl_ptc.BasePTCLayer):
+    ...     """Install collective.foo"""
+    ... 
+    ...     def afterSetUp(self):
+    ...         ZopeTestCase.installPackage('collective.foo')
+    ...         self.addProfile('collective.foo:default')
+    >>> 
+    >>> layer = Layer([tcl_ptc.ptc_layer])
+
+To use this layer in a README.txt doctest, you could use a
+collective.foo.tests module like this:
+
+    >>> import unittest
+    >>> from zope.testing import doctest
+    >>> 
+    >>> from Testing import ZopeTestCase
+    >>> from Products.PloneTestCase import ptc
+    >>>
+    >>> from collective.foo import testing
+    >>> 
+    >>> optionflags = (doctest.NORMALIZE_WHITESPACE|
+    ...                doctest.ELLIPSIS|
+    ...                doctest.REPORT_NDIFF)
+    >>> 
+    >>> def test_suite():
+    ...     suite = ZopeTestCase.FunctionalDocFileSuite(
+    ...         'README.txt',
+    ...         optionflags=optionflags,
+    ...         test_class=ptc.FunctionalTestCase)
+    ...     suite.layer = testing.layer
+    ...     return suite
+    >>> 
+    >>> if __name__ == '__main__':
+    ...     unittest.main(defaultTest='test_suite')
+
+Detailed Documentation
+======================
 
 Layer authors often end up reproducing the functionality provided by
 their test case classes since the same functionality is needed to
