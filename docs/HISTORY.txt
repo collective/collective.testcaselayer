@@ -4,6 +4,9 @@ Changelog
 0.3 - Unreleased
 ----------------
 
+* The collective.testcaselayer.ptc module needs to call
+  ptc.setupPloneSite() in order to make sure the plone site exists
+
 0.2 - 2008-01-08
 ----------------
 

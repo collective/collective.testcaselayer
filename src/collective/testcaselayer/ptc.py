@@ -2,6 +2,8 @@ from Products.PloneTestCase import ptc
 
 from collective.testcaselayer import ztc
 
+ptc.setupPloneSite()
+
 class PTCLayer(ztc.TestCaseLayer, ptc.PloneTestCase):
     """PloneTestCase as a sandboxed layer."""
     pass
