@@ -15,8 +15,38 @@ Quick Start
 
 For a simple testing layer which installs a collective namespace
 package into Zope and installs it's GenericSetup profile into the
-PloneTestCase Plone site, you could use a collective.foo.testing
-module like this:
+PloneTestCase Plone site you can do the following.
+
+Specify the testing dependency on collective.testcaselayer in the
+egg's setup.py::
+
+    from setuptools import setup, find_packages
+    ...
+    tests_require = ['collective.testcaselayer']
+    ...
+    setup(name='collective.foo',
+          ...
+          install_requires=[
+              'setuptools',
+              # -*- Extra requirements: -*-
+          ],
+          tests_require=tests_require,
+          extras_require={'tests': tests_require},
+          ...
+          entry_points="""
+
+Tell your buildout to include the testing dependencies.  This is only
+necessary for deployments where you'll be running the tests.  As such,
+you can leave this out of your production buildout configuration and
+put it only in your buildout's development configuration::
+
+    ...
+    eggs +=
+        collective.foo [tests]
+    ...
+
+Define the layer.  You could use a collective.foo.testing module like
+this:
 
     >>> from Products.PloneTestCase import ptc
     >>> 
@@ -56,6 +86,11 @@ collective.foo.tests module like this:
     >>> 
     >>> if __name__ == '__main__':
     ...     unittest.main(defaultTest='test_suite')
+
+Now write your README.txt doctest and your tests can be run with
+something like::
+
+    $ bin/instance test -s collective.foo
 
 Detailed Documentation
 ======================
