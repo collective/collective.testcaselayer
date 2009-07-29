@@ -4,6 +4,8 @@ Changelog
 0.3 - Unreleased
 ----------------
 
+* Tested against Plone 3.3rc4
+
 * Add sample code for basic Plone test case layers
 
 * Deprecate zope.testing<3.6 support
