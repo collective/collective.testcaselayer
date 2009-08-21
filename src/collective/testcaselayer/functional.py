@@ -4,6 +4,13 @@ import transaction
 from Testing.ZopeTestCase.functional import savestate
 from Testing.ZopeTestCase.zopedoctest import functional
 
+orig_outstream_init = functional.DocResponseWrapper.__init__
+def outstream_init(self, response, outstream, path, header_output):
+    if not response.body:
+        response.body = outstream.getvalue()
+    orig_outstream_init(self, response, outstream, path,
+                        header_output)
+
 @savestate
 def http(request_string, handle_errors=True):
     """Execute an HTTP request string via the publisher

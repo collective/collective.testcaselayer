@@ -4,13 +4,15 @@
 ZopeTestCase.zopedoctest.functional
 ===================================
 
-Patch for bug #98437 - TestBrowser Referer: header set to 'localhost'
+Patches for some functional testing bugs:
 
-https://bugs.launchpad.net/bugs/98437
+  - bug #98437 - TestBrowser Referer: header set to 'localhost'
+    https://bugs.launchpad.net/bugs/98437
+  - Streaming downloads through the response don't work
 
 Add a document which renders the referer.
 
-    >>> self.folder.addDTMLDocument(
+    >>> folder.addDTMLDocument(
     ...     'index_html', file='''\
     ... <html><body>
     ... <dtml-var "REQUEST['HTTP_REFERER']">
@@ -38,7 +40,28 @@ Before patching, fresh requests have an invalid referer.
     <a href=".">link</a>
     </html></body>
 
-Patch the http function.
+
+Add a script that streams content to the response.
+
+    >>> from Products.PythonScripts import PythonScript
+    >>> PythonScript.manage_addPythonScript(folder, 'foo.txt')
+    ''
+    >>> folder['foo.txt'].ZPythonScript_edit(params='', body='''\
+    ... context.REQUEST.response.setHeader('Content-Type', 'text/plain')
+    ... context.REQUEST.response.setHeader(
+    ...     'Content-Disposition',
+    ...     'attachment;filename=foo.txt')
+    ... context.REQUEST.response.write('foo')''')
+
+Before patching, data streamed to the response is not in the browser
+contents.
+
+    >>> browser.open(folder['foo.txt'].absolute_url())
+    >>> browser.isHtml
+    False
+    >>> print browser.contents
+
+Apply the patches.
 
     >>> from Products.Five import zcml
     >>> from Products.Five import fiveconfigure
@@ -88,3 +111,15 @@ Clicking a link should set the referer.
     <a href=".">link</a>
     </html></body>
 
+Data streamed to the response is now in the browser contents.
+
+    >>> browser.open(folder['foo.txt'].absolute_url())
+    >>> browser.isHtml
+    False
+    >>> print browser.contents
+    Status: 200 OK
+    X-Powered-By: Zope (www.zope.org), Python (www.python.org)
+    Content-Length: 0
+    Content-Type: text/plain
+    Content-Disposition: attachment;filename=foo.txt
+    foo
