@@ -1,0 +1,21 @@
+=================================
+collective.testcaselayer.snapshot
+=================================
+
+Snapshot layers build on sandboxed layers but use a real FileStorage
+for each layer instead of a DemoStorage.  If present on subsequent
+test runs, the FileStorage corresponding to the layer is used instead
+of running the layer set up again.  This can be used to greatly
+expedite subsequent test runs.  It can also be used get more accurate
+profiling or coverage data from the test runner by excluding the code
+necessary to set up the layers.
+
+The FileStorage files will be named after the layer name as returned
+by zope.testing.testrunner.find.name_from_layer().  As such, the
+effects of using snapshotted layers whose name is the same are
+undefined.  The files will be placed in the directory given in the
+fss_dir argument which defaults to '$INSTANCEHOME/var'.
+Currently, no implementation for converting storage is provided so the
+storages of any base layers must also be FileStorages.
+
+TODO
