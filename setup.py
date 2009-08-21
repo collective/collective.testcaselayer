@@ -37,6 +37,7 @@ setup(name='collective.testcaselayer',
           'setuptools',
           # -*- Extra requirements: -*-
           'zope.testing>=3.6dev',
+          'collective.monkeypatcher',
       ],
       entry_points="""
       # -*- Entry points: -*-
