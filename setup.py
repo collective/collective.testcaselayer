@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.1'
+version = '1.2'
 
 src_path = ("src", "collective", "testcaselayer")
 
@@ -31,7 +31,7 @@ setup(name='collective.testcaselayer',
       license='GPL',
       packages=find_packages('src', exclude=['ez_setup']),
       package_dir = {'':'src'},
-      package_data = {'collective.testcaselayer': ['*.txt']},
+      include_package_data=True,
       namespace_packages=['collective'],
       zip_safe=False,
       install_requires=[
