@@ -1,6 +1,5 @@
 .. -*-doctest-*-
 
-============================
 collective.testcaselayer.ztc
 ============================
 
@@ -22,7 +21,7 @@ addProfile() and addProduct() see ctc.txt and ptc.txt for more
 details.
 
 Layers
-======
+------
 
 The collective.testcaselayer.ztc module provides sandboxed layers that
 set up the test fixtures for ZopeTestCase.  Note that test case based
@@ -102,7 +101,7 @@ Now everything is back to its previous state.
     0
 
 Layer Base Classes
-==================
+------------------
 
 The collective.testcaselayer.ztc module also provides base classes for
 sandboxed layers that don't actually set up the test case fixtures but

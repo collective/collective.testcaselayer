@@ -1,4 +1,1 @@
-Introduction
-============
-
-see collective/testcaselayer/README.txt
+see src/collective/testcaselayer/README.txt

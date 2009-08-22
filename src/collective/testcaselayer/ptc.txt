@@ -1,6 +1,5 @@
 .. -*-doctest-*-
 
-============================
 collective.testcaselayer.ptc
 ============================
 
@@ -11,7 +10,7 @@ classes.  Here we will only demonstrate that the facilities specific
 to PloneTestCase not inherited from ZopeTestCase.
 
 Layers
-======
+------
 
 The PloneTestCase test fixture can be set up and torn down as a layer.
 
@@ -71,7 +70,7 @@ The PloneTestCase test fixture is no longer set up.
     >>> ZopeTestCase.close(app)
 
 Layer Base Classes
-==================
+------------------
 
 The PloneTestCase class facilities can also be used in layers that use
 the PloneTestCase layer base class.

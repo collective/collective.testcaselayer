@@ -1,6 +1,5 @@
 .. -*-doctest-*-
 
-==============================
 collective.testcaselayer.layer
 ==============================
 
@@ -24,7 +23,7 @@ to group layers together into one layer.
     >>> from collective.testcaselayer import layer
 
 Layer Classes
-=============
+-------------
 
 Use the collective.testcaselayer.layer.Layer class to create your own
 layer classes.
@@ -54,7 +53,7 @@ as a class method which will raise an error.
     TypeError: unbound method setUp() must be called with FooLayer instance as first argument (got nothing instead)
 
 Base Layers
-===========
+-----------
 
 Base layers are designated by passing them into the layer class on
 instantiation.
@@ -77,7 +76,7 @@ Set up the layers.
     in ... seconds.
 
 Grouping Layers
-===============
+---------------
 
 If all that's required from a layer is that it groups other layers as
 base layers, then the collective.testcaselayer.layer.Layer class can

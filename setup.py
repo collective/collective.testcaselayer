@@ -15,6 +15,7 @@ setup(name='collective.testcaselayer',
               src_path + ("ztc.txt",),
               src_path + ("layer.txt",),
               src_path + ("sandbox.txt",),
+              src_path + ("functional.txt",),
               ("docs", "HISTORY.txt"),
               ("docs", "TODO.txt")
               ]),

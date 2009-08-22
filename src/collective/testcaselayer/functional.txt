@@ -1,14 +1,14 @@
 .. -*-doctest-*-
 
-===================================
-ZopeTestCase.zopedoctest.functional
-===================================
+Functional and testbrowser testing patches
+==========================================
 
-Patches for some functional testing bugs:
+If you include the collective.testcaselayer configure.zcml, you'll get
+some monkey patches for some functional testing and testbrowser bugs:
 
   - bug #98437 - TestBrowser Referer: header set to 'localhost'
     https://bugs.launchpad.net/bugs/98437
-  - Streaming downloads through the response don't work
+  - Streaming data into the response don't work
 
 Add a document which renders the referer.
 

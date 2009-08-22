@@ -95,6 +95,8 @@ something like::
 Detailed Documentation
 ======================
 
+.. contents:: Table of Contents
+
 Layer authors often end up reproducing the functionality provided by
 their test case classes since the same functionality is needed to
 perform layer set up or tear down.  The collective.testcaselayer.ztc,
