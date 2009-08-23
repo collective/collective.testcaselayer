@@ -3,12 +3,32 @@
 Functional and testbrowser testing patches
 ==========================================
 
-If you include the collective.testcaselayer configure.zcml, you'll get
-some monkey patches for some functional testing and testbrowser bugs:
+To use these patches, include the collective.testcaselayer
+configure.zcml.  The patches address some bugs in
+Testing.ZopeTestCase.
 
-  - bug #98437 - TestBrowser Referer: header set to 'localhost'
-    https://bugs.launchpad.net/bugs/98437
-  - Streaming data into the response don't work
+Data streamed to the response
+-----------------------------
+
+Due to some behavior in Testing.ZopeTestCase.zopedoctest.functional,
+the testbrowser.contents was empty when data had been streamed
+directly into the response (as opposed to returning the data from the
+callable published).  This made it difficult to do functional testing
+for code that needed to stream data to the response for performance,
+such as when the response data is very large and would consume too
+much memory.
+
+HTTP_REFERRER
+-------------
+
+Due to `bug #98437 <https://bugs.launchpad.net/bugs/98437>`_,
+"TestBrowser Referer: header set to 'localhost'", some testbrowser
+requests would raise NotFound.  Two examples would be visiting the
+Plone login_form directly rather than following a link, or using the
+Plone content_status_history form.    
+
+Test the Patches
+----------------
 
 Add a document which renders the referer.
 
