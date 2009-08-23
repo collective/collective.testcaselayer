@@ -32,13 +32,20 @@ Using Snapshot Layers
 
 Successful use of snapshot layers depends on the following:
 
-  - Use only when repeatedly running the specific test your working on
-    immediately, the inner loop of your testing workflow
+  - Only use snapshots for sandbox layers where the layer and *all*
+    it's base sandbox layers make changes to the *ZODB only*
 
-  - Only snapshot layers that work in progress will not affect
+  - *Use only* when repeatedly running the specific test your working
+    on immediately, the inner loop of your testing workflow
 
-  - Always run all tests without any snapshot layers before committing
-    work in progress
+  - Only snapshot layers that work in progress will not affect *at
+    all*
+
+  - Run tests *without any* snapshots the moment any unexpected
+    results are encountered
+
+  - Always run all tests without any snapshot layers *before
+    committing* work in progress
 
 Use of snapshot layers is intentionally manual and should never be
 automated so as to avoid the inconsistency that can occur when a
