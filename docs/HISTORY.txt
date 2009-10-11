@@ -1,8 +1,12 @@
 Changelog
 =========
 
-1.3 - Unreleased
-----------------
+1.2.1 - 2009-10-11
+------------------
+
+* Move the ZTC functional doctest monkey patches to testing.zcml so
+  that they don't get picked up under auto-include.  optilude reported
+  this was breaking debug-mode.
 
 1.2 - 2009-08-21
 ----------------
