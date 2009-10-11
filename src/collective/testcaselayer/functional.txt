@@ -87,7 +87,7 @@ Apply the patches.
     >>> from Products.Five import fiveconfigure
     >>> from collective import testcaselayer
     >>> fiveconfigure.debug_mode = True
-    >>> zcml.load_config('configure.zcml', package=testcaselayer)
+    >>> zcml.load_config('testing.zcml', package=testcaselayer)
     >>> fiveconfigure.debug_mode = False
 
 A fresh request should have no referer.
