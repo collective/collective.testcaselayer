@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.1'
+version = '1.3'
 
 src_path = ("src", "collective", "testcaselayer")
 
@@ -15,6 +15,7 @@ setup(name='collective.testcaselayer',
               src_path + ("ztc.txt",),
               src_path + ("layer.txt",),
               src_path + ("sandbox.txt",),
+              src_path + ("functional.txt",),
               ("docs", "HISTORY.txt"),
               ("docs", "TODO.txt")
               ]),
@@ -30,13 +31,14 @@ setup(name='collective.testcaselayer',
       license='GPL',
       packages=find_packages('src', exclude=['ez_setup']),
       package_dir = {'':'src'},
-      package_data = {'collective.testcaselayer': ['*.txt']},
+      include_package_data=True,
       namespace_packages=['collective'],
       zip_safe=False,
       install_requires=[
           'setuptools',
           # -*- Extra requirements: -*-
           'zope.testing>=3.6dev',
+          'collective.monkeypatcher',
       ],
       entry_points="""
       # -*- Entry points: -*-
