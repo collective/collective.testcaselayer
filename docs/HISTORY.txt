@@ -1,6 +1,17 @@
 Changelog
 =========
 
+1.3 - Unreleased
+----------------
+
+1.2 - 2009-08-21
+----------------
+
+* Add a patch so that data streamed to the response is available in
+  testbrowser.contents. [rossp]
+* Add a patch for the HTTP_REFERER testbrowser bug.
+  https://bugs.launchpad.net/bugs/98437 [rossp]
+
 1.1 - 2009-07-29
 ----------------
 

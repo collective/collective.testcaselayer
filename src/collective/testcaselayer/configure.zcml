@@ -1,0 +1,22 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:monkey="http://namespaces.plone.org/monkey"
+   i18n_domain="collective.testcaselayer">
+  
+  <include package="collective.monkeypatcher" file="meta.zcml" />
+
+  <monkey:patch
+     class="Testing.ZopeTestCase.zopedoctest.functional.DocResponseWrapper"
+     original="__init__"
+     replacement=".functional.outstream_init"
+     docstringWarning="False"
+     />
+  
+  <monkey:patch
+     module="Testing.ZopeTestCase.zopedoctest.functional"
+     original="http"
+     replacement=".functional.http"
+     docstringWarning="False"
+     />
+  
+</configure>
