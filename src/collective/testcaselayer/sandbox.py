@@ -10,22 +10,21 @@ from Testing import ZopeTestCase
 orig_app = ZopeTestCase.Zope2.app
 
 class Sandboxed(object):
-
+    
     def _app(self):
         self.orig_bobo_application = Zope2.bobo_application
         self.orig_db = Zope2.DB
         stuff = self.orig_bobo_application._stuff
-        try:
-            db, name, version_cookie_name = stuff
-            kw = dict(version_cookie_name=version_cookie_name)
-        except ValueError:
-            db, name = stuff    # zope 2.12 only has these two anymore...
-            kw = dict()
+        db, name = stuff[:2]
+        kw = {}
+        if len(stuff) == 3:
+            # BBB zope 2.12 no longer has a version cookie
+            kw['version_cookie_name'] = stuff[-1]
         new_db = self._getNewDB(db)
         Zope2.DB = new_db
         Zope2.bobo_application = ZApplication.ZApplicationWrapper(
-            new_db, name,
-            klass=self.orig_bobo_application._klass, **kw)
+            new_db, name, klass=self.orig_bobo_application._klass,
+            **kw)
         return super(Sandboxed, self)._app()
 
     def _getNewDB(self, db):
