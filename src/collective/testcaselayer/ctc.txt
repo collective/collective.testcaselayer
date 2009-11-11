@@ -29,7 +29,7 @@ call the setupCMFSite() function.
     >>> options = runner.get_options([], [])
     >>> setup_layers = {}
     >>> runner.setup_layer(options, cmfsite_layer, setup_layers)
-    Set up Products.CMFTestCase.layer.ZCML in ... seconds.
+    Set up...Products.CMFTestCase.layer.ZCML in ... seconds.
     Set up Products.CMFTestCase.layer.CMFSite in ... seconds.
 
 The CMFTestCase test fixture has not been set up.
