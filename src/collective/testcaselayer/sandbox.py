@@ -14,14 +14,18 @@ class Sandboxed(object):
     def _app(self):
         self.orig_bobo_application = Zope2.bobo_application
         self.orig_db = Zope2.DB
-        db, name, version_cookie_name = (
-            self.orig_bobo_application._stuff)
+        stuff = self.orig_bobo_application._stuff
+        try:
+            db, name, version_cookie_name = stuff
+            kw = dict(version_cookie_name=version_cookie_name)
+        except ValueError:
+            db, name = stuff    # zope 2.12 only has these two anymore...
+            kw = dict()
         new_db = self._getNewDB(db)
         Zope2.DB = new_db
         Zope2.bobo_application = ZApplication.ZApplicationWrapper(
             new_db, name,
-            klass=self.orig_bobo_application._klass,
-            version_cookie_name=version_cookie_name)
+            klass=self.orig_bobo_application._klass, **kw)
         return super(Sandboxed, self)._app()
 
     def _getNewDB(self, db):

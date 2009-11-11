@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.2.2 - Unreleased
+------------------
+
+* Fix `Sandboxed` replacement for Zope 2.12 / Plone 4.
+  [witsch]
+
 1.2.1 - 2009-10-11
 ------------------
 
