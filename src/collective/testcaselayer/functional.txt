@@ -125,7 +125,7 @@ Clicking a link should set the referer.
     >>> browser.getLink('link').click()
     >>> print browser.contents
     <html><body>
-    http://nohost/test_folder_1_/
+    http://nohost/test_folder_1_/...
     <form action="." method="post" id="post"></form>
     <form action="." method="get" id="get"></form>
     <a href=".">link</a>
