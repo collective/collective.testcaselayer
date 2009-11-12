@@ -4,10 +4,8 @@ Changelog
 1.2.2 - Unreleased
 ------------------
 
-* Zope 2.10-2.12 compatibility
-
-* Fix `Sandboxed` replacement for Zope 2.12 / Plone 4.
-  [witsch]
+* Zope 2.10-2.12 compatibility.
+  [rossp, witsch]
 
 1.2.1 - 2009-10-11
 ------------------
