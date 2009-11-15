@@ -11,6 +11,13 @@
      replacement=".functional.outstream_init"
      docstringWarning="False"
      />
+
+  <monkey:patch
+     class="ZPublisher.HTTPResponse.HTTPResponse"
+     original="setBody"
+     replacement=".functional.setBody"
+     handler=".functional.applyPatch"
+     docstringWarning="false" />
   
   <monkey:patch
      module="Testing.ZopeTestCase.zopedoctest.functional"

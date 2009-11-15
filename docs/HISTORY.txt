@@ -4,8 +4,15 @@ Changelog
 1.2.2 - Unreleased
 ------------------
 
-* Zope 2.10-2.12 compatibility.
+* Add functional testing support for stream iterator responses.  Taken
+  from witsch's plone.app.blob testing patches.
+  [rossp]
+
+* Zope 2.10-2.12 compatibility
   [rossp, witsch]
+
+* Fix `Sandboxed` replacement for Zope 2.12 / Plone 4.
+  [witsch]
 
 1.2.1 - 2009-10-11
 ------------------

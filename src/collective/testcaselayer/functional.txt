@@ -18,6 +18,13 @@ for code that needed to stream data to the response for performance,
 such as when the response data is very large and would consume too
 much memory.
 
+Stream iterators
+----------------
+
+A patch taken from plone.app.blob is also included so that HTTP
+responses in the test environment support stream iterators.  This
+allows functional testing of code that makes use of stream iterators.
+
 HTTP_REFERRER
 -------------
 
@@ -60,7 +67,6 @@ Before patching, fresh requests have an invalid referer.
     <a href=".">link</a>
     </html></body>
 
-
 Add a script that streams content to the response.
 
     >>> from Products.PythonScripts import PythonScript
@@ -80,6 +86,31 @@ contents.
     >>> browser.isHtml
     False
     >>> print browser.contents
+
+Add a script that returns a stream iterator.
+
+    >>> from Products.PythonScripts import PythonScript
+    >>> PythonScript.manage_addPythonScript(folder, 'bar.txt')
+    ''
+    >>> folder['bar.txt'].ZPythonScript_edit(params='', body='''\
+    ... from collective.testcaselayer.testing.iterator import (
+    ...     StreamIterator)
+    ... context.REQUEST.response.setHeader('Content-Type', 'text/plain')
+    ... context.REQUEST.response.setHeader(
+    ...     'Content-Disposition',
+    ...     'attachment;filename=bar.txt')
+    ... return StreamIterator(['bar', 'qux'])''')
+
+    >>> from AccessControl import allow_module
+    >>> allow_module('collective.testcaselayer.testing.iterator')
+
+Stream iterators are not supported.
+
+    >>> browser.open(folder['bar.txt'].absolute_url())
+    >>> browser.isHtml
+    False
+    >>> print browser.contents
+    ['bar', 'qux']
 
 Apply the patches.
 
@@ -143,3 +174,11 @@ Data streamed to the response is now in the browser contents.
     Content-Type: text/plain
     Content-Disposition: attachment;filename=foo.txt
     foo
+
+Stream iterators are now in the browser contents.
+
+    >>> browser.open(folder['bar.txt'].absolute_url())
+    >>> browser.isHtml
+    False
+    >>> print browser.contents
+    barqux
