@@ -1,5 +1,6 @@
 from collective.testcaselayer import ptc as tcl_ptc
 
+from Products.MailHost import interfaces
 from Products.SecureMailHost import SecureMailHost
 
 class MockMailHost(SecureMailHost.SecureMailHost):
@@ -15,6 +16,7 @@ class MockMailHost(SecureMailHost.SecureMailHost):
     def _send(self, *args, **kw):
         self.messages.append((args, kw))
         self._p_changed = True
+    send = _send
     
     def pop(self, idx=-1):
         result = self.messages.pop(idx)
@@ -29,6 +31,8 @@ class MockMailHostLayer(tcl_ptc.BasePTCLayer):
 
     def afterSetUp(self):
         self.portal._original_MailHost = self.portal.MailHost
-        self.portal.MailHost = MockMailHost('MailHost')
+        self.portal.MailHost = mh = MockMailHost('MailHost')
+        self.portal.getSiteManager().registerUtility(
+            mh, interfaces.IMailHost)
 
 mockmailhost_layer = MockMailHostLayer([tcl_ptc.ptc_layer])
