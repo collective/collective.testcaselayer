@@ -128,8 +128,8 @@ The FooLayer test fixture has been set up.
     'foo'
 
     >>> from AccessControl import SecurityManagement
-    >>> SecurityManagement.getSecurityManager().getUser()
-    <User 'portal_owner'>
+    >>> SecurityManagement.getSecurityManager().getUser().getId()
+    'portal_owner'
 
     >>> ZopeTestCase.close(app)
 

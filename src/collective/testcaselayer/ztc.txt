@@ -43,9 +43,8 @@ Before we set up ZopeTestCase as a layer, nothing has been set up.
 
     >>> from Testing import ZopeTestCase
     >>> app = ZopeTestCase.app()
-    >>> app.objectValues()
-    [<UserFolder at /acl_users>,
-     <ApplicationManager at /Control_Panel>]
+    >>> 'test_folder_1_' in app.objectIds()
+    False
     >>> ZopeTestCase.close(app)
 
     >>> from Testing.ZopeTestCase import connections
@@ -66,10 +65,8 @@ in user.
     >>> SecurityManagement.getSecurityManager().getUser()
     <SpecialUser 'Anonymous User'>
 
-    >>> ztc.ztc_layer.app.objectValues()
-    [<UserFolder at /acl_users>,
-     <ApplicationManager at /Control_Panel>,
-     <Folder at /test_folder_1_>]
+    >>> 'test_folder_1_' in  ztc.ztc_layer.app.objectIds()
+    True
 
 Also note that the app attribute of the layer represents an open
 connection to the ZODB.
@@ -92,9 +89,8 @@ Now everything is back to its previous state.
 
     >>> from Testing import ZopeTestCase
     >>> app = ZopeTestCase.app()
-    >>> app.objectValues()
-    [<UserFolder at /acl_users>,
-     <ApplicationManager at /Control_Panel>]
+    >>> 'test_folder_1_' in app.objectIds()
+    False
     >>> ZopeTestCase.close(app)
 
     >>> connections.count()
