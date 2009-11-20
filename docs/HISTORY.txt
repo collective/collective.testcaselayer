@@ -4,6 +4,8 @@ Changelog
 1.2.3 - Unreleased
 ------------------
 
+* Add a mock mail host layer [rossp]
+
 1.2.2 - 2009-11-14
 ------------------
 

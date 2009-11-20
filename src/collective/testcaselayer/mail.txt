@@ -1,0 +1,40 @@
+.. -*-doctest-*-
+
+Mock Mailhost
+=============
+
+If a testing layer uses the
+collective.testcaselayer.mail.mockmailhost_layer as a base layer then
+messages sent with the portal.MailHost.send method will be appended to
+a list for checking in tests.
+
+Start with an empty MailHost.
+
+    >>> len(portal.MailHost)
+    0
+
+Send a message.
+
+    >>> portal.MailHost.send("""\
+    ... From: foo@foo.com
+    ... To: bar@foo.com
+    ... Subject: Foo message subject
+    ... 
+    ... Foo message body
+    ... """)
+
+The MailHost now contains one message.
+
+    >>> len(portal.MailHost)
+    1
+
+The message an be removed using the pop method in which case it's
+removed from the list.
+
+    >>> portal.MailHost.pop()
+    (('foo@foo.com',
+      ['bar@foo.com'],
+      'From: foo@foo.com\nTo: bar@foo.com\nSubject: Foo message subject\nDate: ...\n\nFoo message body\n'),
+     {})
+    >>> len(portal.MailHost)
+    0
