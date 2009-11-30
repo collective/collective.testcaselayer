@@ -1,3 +1,5 @@
+import email.Message
+
 from collective.testcaselayer import ptc as tcl_ptc
 
 from Products.MailHost import interfaces
@@ -13,10 +15,13 @@ class MockMailHost(SecureMailHost.SecureMailHost):
         self.messages = []
         self._p_changed = True
 
-    def _send(self, *args, **kw):
-        self.messages.append((args, kw))
+    def _send(self, mfrom, mto, messageText, debug=False):
+        if not isinstance(messageText, email.Message.Message):
+            message = email.message_from_string(messageText)
+        else:
+            message = messageText
+        self.messages.append(message)
         self._p_changed = True
-    send = _send
     
     def pop(self, idx=-1):
         result = self.messages.pop(idx)
