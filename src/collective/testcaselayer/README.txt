@@ -65,7 +65,7 @@ To use this layer in a README.txt doctest, you could use a
 collective.foo.tests module like this:
 
     >>> import unittest
-    >>> from zope.testing import doctest
+    >>> import doctest
     >>> 
     >>> from Testing import ZopeTestCase
     >>> from Products.PloneTestCase import ptc
