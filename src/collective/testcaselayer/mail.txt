@@ -31,10 +31,11 @@ The MailHost now contains one message.
 The message an be removed using the pop method in which case it's
 removed from the list.
 
-    >>> portal.MailHost.pop()
-    (('foo@foo.com',
-      ['bar@foo.com'],
-      'From: foo@foo.com\nTo: bar@foo.com\nSubject: Foo message subject\nDate: ...\n\nFoo message body\n'),
-     {})
+    >>> print portal.MailHost.pop().as_string()
+    From: foo@foo.com
+    To: bar@foo.com
+    Subject: Foo message subject
+    Date: ...    
+    Foo message body
     >>> len(portal.MailHost)
     0
