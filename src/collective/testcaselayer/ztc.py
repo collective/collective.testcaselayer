@@ -1,3 +1,6 @@
+from Products.Five import zcml
+from Products.Five import fiveconfigure
+
 from Testing import ZopeTestCase
 
 from collective.testcaselayer import testcase, sandbox
@@ -11,6 +14,11 @@ class TestCaseLayer(sandbox.Sandboxed, testcase.TestCaseLayer):
     def _close(self):
         super(TestCaseLayer, self)._close()
         del self.app
+
+    def loadZCML(self, file_, **kw):
+        fiveconfigure.debug_mode = True
+        zcml.load_config(file_, **kw)
+        fiveconfigure.debug_mode = False
 
 class ZTCLayer(TestCaseLayer, ZopeTestCase.ZopeTestCase):
     """ZopeTestCase as a sandboxed layer."""
