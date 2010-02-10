@@ -24,7 +24,6 @@ call the setupPloneSite() function.
 
     >>> from zope.testing.testrunner import runner
     >>> from Products.PloneTestCase import ptc as plone_ptc
-    >>> plone_ptc.setupPloneSite()
     >>> plonesite_layer, = ptc.ptc_layer.__bases__
     >>> options = runner.get_options([], [])
     >>> setup_layers = {}
