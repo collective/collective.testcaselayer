@@ -11,12 +11,13 @@ setup(name='collective.testcaselayer',
       long_description='\n'.join(
           open(os.path.join(*path)).read() for path in [
               src_path + ("README.txt",),
+              src_path + ("common.txt",),
+              src_path + ("mail.txt",),
               src_path + ("ptc.txt",),
               src_path + ("ztc.txt",),
               src_path + ("layer.txt",),
               src_path + ("sandbox.txt",),
               src_path + ("functional.txt",),
-              src_path + ("mail.txt",),
               ("docs", "HISTORY.txt"),
               ("docs", "TODO.txt")
               ]),
