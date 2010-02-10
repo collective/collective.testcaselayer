@@ -10,6 +10,15 @@ expensive test fixtures, such as is often requires for functional
 test.  This package provides several well tested facilities to make
 writing and using layers faster and easier.
 
+The collective.testcaselayer.common.common_layer, used in the Quick
+Start below, also includes some commonly useful test fixtures:
+
+    - a mock mail host
+    - remove 'Unauthorized' and 'NotFound' from error_log ignored
+      exceptions
+    - puts the resources registries in debug mode
+      (portal_css, portal_javascripts, portal_kss)
+
 Quick Start
 ===========
 
@@ -45,21 +54,38 @@ put it only in your buildout's development configuration::
         collective.foo [tests]
     ...
 
-Define the layer.  You could use a collective.foo.testing module like
-this:
+Define the layer.  The layer can use all the same methods as a
+PloneTestCase class, such as:
+
+    - self.login(user_name)
+    - self.loginAsPortalOwner()
+    - self.addProduct(product)
+    - self.addProfile(profile)
+
+An additional, method is provided to load a ZCML file with ZCML debug
+mode enabled:
+
+    - self.loadZCML(file, package=package)
+
+You could use a collective.foo.testing module like this:
 
     >>> from Products.PloneTestCase import ptc
     >>> 
     >>> from collective.testcaselayer import ptc as tcl_ptc
+    >>> from collective.testcaselayer import common
     >>> 
     >>> class Layer(tcl_ptc.BasePTCLayer):
     ...     """Install collective.foo"""
     ... 
     ...     def afterSetUp(self):
     ...         ZopeTestCase.installPackage('collective.foo')
+    ...         
+    ...         from collective.foo import tests
+    ...         self.loadZCML('testing.zcml', package=tests)
+    ...         
     ...         self.addProfile('collective.foo:default')
     >>> 
-    >>> layer = Layer([tcl_ptc.ptc_layer])
+    >>> layer = Layer([common.common_layer])
 
 To use this layer in a README.txt doctest, you could use a
 collective.foo.tests module like this:
