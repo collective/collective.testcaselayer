@@ -29,6 +29,7 @@ def test_suite():
         optionflags=optionflags)
     mail_suite = functional.FunctionalDocFileSuite(
         'mail.txt',
+        'common.txt',
         optionflags=optionflags,
         test_class=ptc.FunctionalTestCase)
     mail_suite.layer = mail.mockmailhost_layer
