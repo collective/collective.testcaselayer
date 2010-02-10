@@ -1,8 +1,12 @@
 Changelog
 =========
 
-1.2.3 - Unreleased
+1.3 - 2010-02-09
 ------------------
+
+* Add a loadZCML convenience method [rossp]
+
+* Add a common layer with some useful test setup [rossp]
 
 * Add a mock mail host layer [rossp]
 
