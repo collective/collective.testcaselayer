@@ -1,5 +1,6 @@
 import sys
 
+
 class Layer(object):
     """A layer instantiated with base layers."""
 

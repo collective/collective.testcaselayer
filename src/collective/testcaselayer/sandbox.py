@@ -9,8 +9,9 @@ from Testing import ZopeTestCase
 
 orig_app = ZopeTestCase.Zope2.app
 
+
 class Sandboxed(object):
-    
+
     def _app(self):
         self.orig_bobo_application = Zope2.bobo_application
         self.orig_db = Zope2.DB
@@ -34,12 +35,13 @@ class Sandboxed(object):
         Zope2.DB = self.orig_db
         Zope2.bobo_application = self.orig_bobo_application
         return super(Sandboxed, self)._close()
-    
+
     def setUp(self):
         """Commit results after setup."""
         result = super(Sandboxed, self).setUp()
         transaction.commit()
         return result
+
 
 # XXX Untested
 def committer(method):

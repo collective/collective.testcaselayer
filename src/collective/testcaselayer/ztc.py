@@ -5,6 +5,7 @@ from Testing import ZopeTestCase
 
 from collective.testcaselayer import testcase, sandbox
 
+
 class TestCaseLayer(sandbox.Sandboxed, testcase.TestCaseLayer):
 
     def _setup(self):
@@ -20,11 +21,13 @@ class TestCaseLayer(sandbox.Sandboxed, testcase.TestCaseLayer):
         zcml.load_config(file_, **kw)
         fiveconfigure.debug_mode = False
 
+
 class ZTCLayer(TestCaseLayer, ZopeTestCase.ZopeTestCase):
     """ZopeTestCase as a sandboxed layer."""
     pass
 
 ztc_layer = ZTCLayer()
+
 
 class PTCLayer(TestCaseLayer, ZopeTestCase.PortalTestCase):
     """PortalTestCase as a sandboxed layer."""
@@ -32,15 +35,17 @@ class PTCLayer(TestCaseLayer, ZopeTestCase.PortalTestCase):
 
 ptc_layer = PTCLayer()
 
+
 class BaseZTCLayerMixin(object):
     """ZTC layer mixin without setting up the test fixture."""
-    
+
     _setup_fixture = False
 
     @property
     def folder(self):
         return getattr(self.app, ZopeTestCase.folder_name)
-    
+
+
 class BasePTCLayerMixin(object):
     """PTC layer mixin without configuring the portal."""
 
@@ -51,9 +56,11 @@ class BasePTCLayerMixin(object):
         return self.portal.portal_membership.getHomeFolder(
             ZopeTestCase.user_name)
 
+
 class BaseZTCLayer(BaseZTCLayerMixin, ZTCLayer):
     """Sandboxed layer base class with ZopeTestCase facilities."""
     pass
+
 
 class BasePTCLayer(BasePTCLayerMixin, PTCLayer):
     """Sandboxed layer base class with PortalTestCase facilities."""

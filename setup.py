@@ -5,6 +5,8 @@ version = '1.3'
 
 src_path = ("src", "collective", "testcaselayer")
 
+tests_require = ['Plone']
+
 setup(name='collective.testcaselayer',
       version=version,
       description="Use test cases as zope.testing layers",
@@ -21,7 +23,8 @@ setup(name='collective.testcaselayer',
               ("docs", "HISTORY.txt"),
               ("docs", "TODO.txt")
               ]),
-      # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
+      # Get more strings from
+      # http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Programming Language :: Python",
         "Topic :: Software Development :: Libraries :: Python Modules",
@@ -32,7 +35,7 @@ setup(name='collective.testcaselayer',
       url='http://pypi.python.org/pypi/collective.testcaselayer',
       license='GPL',
       packages=find_packages('src', exclude=['ez_setup']),
-      package_dir = {'':'src'},
+      package_dir={'': 'src'},
       include_package_data=True,
       namespace_packages=['collective'],
       zip_safe=False,
@@ -42,6 +45,8 @@ setup(name='collective.testcaselayer',
           'zope.testing>=3.6dev',
           'collective.monkeypatcher',
       ],
+      tests_require=tests_require,
+      extras_require={'tests': tests_require},
       entry_points="""
       # -*- Entry points: -*-
       """,

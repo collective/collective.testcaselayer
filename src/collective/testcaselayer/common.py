@@ -1,6 +1,7 @@
 from collective.testcaselayer import ptc
 from collective.testcaselayer import mail
 
+
 class CommonPTCLayer(ptc.BasePTCLayer):
     """A layer with some common useful testing and debugging setup."""
 

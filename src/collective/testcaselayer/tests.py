@@ -11,9 +11,10 @@ from collective.testcaselayer import mail
 # stub out a collective.foo modulte
 sys.modules['collective.foo'] = testcaselayer
 
-optionflags = (doctest.NORMALIZE_WHITESPACE|
-               doctest.ELLIPSIS|
+optionflags = (doctest.NORMALIZE_WHITESPACE |
+               doctest.ELLIPSIS |
                doctest.REPORT_NDIFF)
+
 
 def test_suite():
     doc_suite = doctest.DocFileSuite(

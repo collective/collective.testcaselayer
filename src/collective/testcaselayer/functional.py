@@ -7,11 +7,14 @@ from Testing.ZopeTestCase.functional import savestate
 from Testing.ZopeTestCase.zopedoctest import functional
 
 orig_outstream_init = functional.DocResponseWrapper.__init__
+
+
 def outstream_init(self, response, outstream, path, header_output):
     if not response.body:
         response.body = outstream.getvalue()
     orig_outstream_init(self, response, outstream, path,
                         header_output)
+
 
 def setBody(self, body, *args, **kw):
     if IInterface.providedBy(IStreamIterator):  # is this zope 2.12?
@@ -26,6 +29,7 @@ def setBody(self, body, *args, **kw):
 def applyPatch(scope, original, replacement):
     setattr(scope, '_original_' + original, getattr(scope, original))
     setattr(scope, original, replacement)
+
 
 @savestate
 def http(request_string, handle_errors=True):
@@ -48,7 +52,7 @@ def http(request_string, handle_errors=True):
     # Split off and parse the command line
     l = request_string.find('\n')
     command_line = request_string[:l].rstrip()
-    request_string = request_string[l+1:]
+    request_string = request_string[l + 1:]
     method, path, protocol = command_line.split()
     path = urllib.unquote(path)
 
@@ -65,7 +69,7 @@ def http(request_string, handle_errors=True):
     elif len(p) == 2:
         [env['PATH_INFO'], env['QUERY_STRING']] = p
     else:
-        raise TypeError, ''
+        raise TypeError('')
 
     header_output = functional.HTTPHeaderOutput(
         protocol, ('x-content-type-warning', 'x-powered-by',
@@ -84,7 +88,7 @@ def http(request_string, handle_errors=True):
             name = 'HTTP_' + name
         env[name] = value.rstrip()
 
-    if env.has_key('HTTP_AUTHORIZATION'):
+    if 'HTTP_AUTHORIZATION' in env:
         env['HTTP_AUTHORIZATION'] = functional.auth_header(
             env['HTTP_AUTHORIZATION'])
 
@@ -100,8 +104,10 @@ def http(request_string, handle_errors=True):
     header_output.setResponseStatus(response.getStatus(), response.errmsg)
     header_output.setResponseHeaders(response.headers)
     header_output.appendResponseHeaders(response._cookie_list())
-    header_output.appendResponseHeaders(response.accumulated_headers.splitlines())
+    header_output.appendResponseHeaders(
+        response.accumulated_headers.splitlines())
 
     functional.sync()
 
-    return functional.DocResponseWrapper(response, outstream, path, header_output)
+    return functional.DocResponseWrapper(
+        response, outstream, path, header_output)
