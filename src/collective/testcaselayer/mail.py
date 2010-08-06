@@ -3,13 +3,13 @@ import email.Message
 from collective.testcaselayer import ptc as tcl_ptc
 
 from Products.MailHost import interfaces
-from Products.SecureMailHost import SecureMailHost
+from Products.MailHost import MailHost
 
 
-class MockMailHost(SecureMailHost.SecureMailHost):
+class MockMailHost(MailHost.MailHost):
 
     def __init__(self, id):
-        super(MockMailHost, self).__init__(id, smtp_notls=True)
+        super(MockMailHost, self).__init__(id)
         self.reset()
 
     def reset(self):

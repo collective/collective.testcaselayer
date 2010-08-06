@@ -39,3 +39,22 @@ removed from the list.
     Foo message body
     >>> len(portal.MailHost)
     0
+
+The mock mail host can handle more complicated call signatures used in
+the wild.
+
+    >>> portal.MailHost.send(
+    ...     """\
+    ... From: foo@foo.com
+    ... To: bar@foo.com
+    ... Subject: Qux message subject
+    ... 
+    ... Qux message body
+    ... """, 'bar@foo.com', 'foo@foo.com',
+    ...     subject='Qux message subject')
+
+    >>> print portal.MailHost.pop().as_string()
+    To: bar@foo.com...
+    Qux message body
+    >>> len(portal.MailHost)
+    0
