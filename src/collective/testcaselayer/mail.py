@@ -5,8 +5,15 @@ from collective.testcaselayer import ptc as tcl_ptc
 from Products.MailHost import interfaces
 from Products.MailHost import MailHost
 
+# BBB
+try:
+    from Products.SecureMailHost.SecureMailHost import SecureMailHost
+    SecureMailHost  # pyflakes
+except ImportError:
+    SecureMailHost = object
 
-class MockMailHost(MailHost.MailHost):
+
+class MockMailHost(MailHost.MailHost, SecureMailHost):
 
     def __init__(self, id):
         super(MockMailHost, self).__init__(id)
