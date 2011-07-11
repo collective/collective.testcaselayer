@@ -1,5 +1,6 @@
 import email.Message
 
+import collective.testcaselayer
 from collective.testcaselayer import ptc as tcl_ptc
 
 from Products.MailHost import interfaces
@@ -15,7 +16,7 @@ except ImportError:
 
 class MockMailHost(MailHost.MailHost, SecureMailHost):
 
-    def __init__(self, id):
+    def __init__(self, id=''):
         super(MockMailHost, self).__init__(id)
         self.reset()
 
@@ -45,8 +46,8 @@ class MockMailHostLayer(tcl_ptc.BasePTCLayer):
 
     def afterSetUp(self):
         self.portal._original_MailHost = self.portal.MailHost
-        self.portal.MailHost = mh = MockMailHost('MailHost')
-        self.portal.getSiteManager().registerUtility(
-            mh, interfaces.IMailHost)
+
+        self.loadZCML('configure.zcml', package=collective.testcaselayer)
+        self.addProfile('collective.testcaselayer:testing')
 
 mockmailhost_layer = MockMailHostLayer([tcl_ptc.ptc_layer])

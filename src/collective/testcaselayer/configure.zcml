@@ -1,0 +1,14 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+   i18n_domain="collective.pm">
+
+  <genericsetup:registerProfile
+     name="testing"
+     title="TestCase Layers Support"
+     description="Install the support use for TestCase layers.  May
+     also be used to add some useful stuff when debugging real sites."
+     provides="Products.GenericSetup.interfaces.EXTENSION"
+     />
+
+</configure>
