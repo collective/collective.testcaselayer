@@ -3,7 +3,6 @@ import email.Message
 import collective.testcaselayer
 from collective.testcaselayer import ptc as tcl_ptc
 
-from Products.MailHost import interfaces
 from Products.MailHost import MailHost
 
 # BBB
