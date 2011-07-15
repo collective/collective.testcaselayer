@@ -1,8 +1,21 @@
 Changelog
 =========
 
-1.3 - Unreleased
+1.4 - 2011-07-15
 ----------------
+
+* Move the mock mail host to an actual GS profile so it won't be
+  replaced when dependent layers run their own profiles.  Also makes
+  the mock mail host usable outside of tests.
+  [rossp]
+
+* Add some utility methods for setting testbrowser AT calendar widgets
+  without end/beginning-of-month intermittent failures.
+  [rossp]
+
+* Avoid a version conflict between PloneTestCase and
+  zope.testing/testrunner.
+  [rossp]
 
 1.3 - 2010-02-09
 ------------------
