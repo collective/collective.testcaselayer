@@ -1,5 +1,11 @@
-from Products.Five import zcml
-from Products.Five import fiveconfigure
+try:
+    from Zope2.App import zcml
+except ImportError:
+    from Products.Five import zcml
+try:
+    from zope.component.hooks import getSite, setSite
+except ImportError:
+    from zope.app.component.hooks import getSite, setSite
 
 from Testing import ZopeTestCase
 
@@ -17,9 +23,16 @@ class TestCaseLayer(sandbox.Sandboxed, testcase.TestCaseLayer):
         del self.app
 
     def loadZCML(self, file_, **kw):
-        fiveconfigure.debug_mode = True
-        zcml.load_config(file_, **kw)
-        fiveconfigure.debug_mode = False
+        # In Zope 2.13, ZCML registrations no longer use getGlobalSiteManager
+        # and thus may end up in the local, persistent site manager.
+        # Since we do not want that, we unset the current site while the
+        # ZCML is loaded.
+        saved = getSite()
+        setSite(None)
+        try:
+            zcml.load_config(file_, **kw)
+        finally:
+            setSite(saved)
 
 
 class ZTCLayer(TestCaseLayer, ZopeTestCase.ZopeTestCase):

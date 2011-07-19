@@ -4,6 +4,10 @@ Changelog
 1.5 - Unreleased
 ----------------
 
+* Make loadZCML unset the local site while importing ZCML. This is
+  required for Plone 4.1 testcase layers.
+  [stefan]
+
 1.4 - 2011-07-15
 ----------------
 
