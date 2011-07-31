@@ -5,12 +5,12 @@ from Testing import ZopeTestCase
 
 from collective.testcaselayer import testcase, sandbox
 
+# The base class does cleanup on setUp failure since test case
+# tearDown doesn't get run if setUp failures.  But under
+# zope.testing.testrunner, layer tearDown does get run even if layer
+# setUp fails.
 
 class TestCaseLayer(sandbox.Sandboxed, testcase.TestCaseLayer):
-
-    def _setup(self):
-        super(TestCaseLayer, self)._setup()
-        self.logout()
 
     def _close(self):
         super(TestCaseLayer, self)._close()
@@ -41,6 +41,18 @@ class BaseZTCLayerMixin(object):
 
     _setup_fixture = False
 
+    def setUp(self):
+        """Let layer tear down do cleanup and logout after setup."""
+        result = super(BaseZTCLayerMixin, self).setUp()
+
+        self.beforeSetUp()
+        self.app = self._app()
+        self._setup()
+        self.logout()
+        self.afterSetUp()
+
+        return result
+
     @property
     def folder(self):
         return getattr(self.app, ZopeTestCase.folder_name)
@@ -50,6 +62,18 @@ class BasePTCLayerMixin(object):
     """PTC layer mixin without configuring the portal."""
 
     _configure_portal = False
+
+    def setUp(self):
+        """Let layer tear down do cleanup and logout after setup."""
+        result = super(BasePTCLayerMixin, self).setUp()
+
+        self.beforeSetUp()
+        self.app = self._app()
+        self.portal = self._portal()
+        self._setup()
+        self.afterSetUp()
+
+        return result
 
     @property
     def folder(self):
