@@ -41,7 +41,7 @@ def http(request_string, handle_errors=True):
     import rfc822
     from cStringIO import StringIO
     from ZPublisher.Response import Response
-    from ZPublisher.Test import publish_module
+    from ZPublisher.Publish import publish_module
 
     # Commit work done by previous python code.
     transaction.commit()
@@ -63,7 +63,7 @@ def http(request_string, handle_errors=True):
            "SERVER_PROTOCOL": protocol,
            }
 
-    p = path.split('?')
+    p = path.split('?', 1)
     if len(p) == 1:
         env['PATH_INFO'] = p[0]
     elif len(p) == 2:
@@ -103,9 +103,8 @@ def http(request_string, handle_errors=True):
                   )
     header_output.setResponseStatus(response.getStatus(), response.errmsg)
     header_output.setResponseHeaders(response.headers)
-    header_output.appendResponseHeaders(response._cookie_list())
-    header_output.appendResponseHeaders(
-        response.accumulated_headers.splitlines())
+    header_output.headersl.extend(response._cookie_list())
+    header_output.appendResponseHeaders(response.accumulated_headers)
 
     functional.sync()
 
