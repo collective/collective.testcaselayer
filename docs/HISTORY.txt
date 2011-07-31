@@ -4,6 +4,14 @@ Changelog
 1.5 - Unreleased
 ----------------
 
+* Plone 4.1 compatibility.
+  [rossp]
+
+* Let layer tear down do cleanup.  Allows post_mortem debugging to see
+  the state in the TB before DB connections are closed or other
+  cleanup is done.
+  [rossp]
+
 1.4 - 2011-07-15
 ----------------
 
