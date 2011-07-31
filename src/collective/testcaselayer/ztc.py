@@ -18,8 +18,10 @@ class TestCaseLayer(sandbox.Sandboxed, testcase.TestCaseLayer):
 
     def loadZCML(self, file_, **kw):
         fiveconfigure.debug_mode = True
-        zcml.load_config(file_, **kw)
-        fiveconfigure.debug_mode = False
+        try:
+            zcml.load_config(file_, **kw)
+        finally:
+            fiveconfigure.debug_mode = False
 
 
 class ZTCLayer(TestCaseLayer, ZopeTestCase.ZopeTestCase):
