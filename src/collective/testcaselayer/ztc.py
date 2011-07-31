@@ -1,7 +1,7 @@
 from Products.Five import zcml
 from Products.Five import fiveconfigure
 
-from Testing import ZopeTestCase
+from Testing import ZopeTestCase as ztc
 
 from collective.testcaselayer import testcase, sandbox
 
@@ -24,14 +24,37 @@ class TestCaseLayer(sandbox.Sandboxed, testcase.TestCaseLayer):
             fiveconfigure.debug_mode = False
 
 
-class ZTCLayer(TestCaseLayer, ZopeTestCase.ZopeTestCase):
+class ZopeTestCase(ztc.ZopeTestCase):
+
+    def setUp(self):
+        """Let layer tear down do cleanup and logout after setup."""
+        self.beforeSetUp()
+        self.app = self._app()
+        self._setup()
+        self.logout()
+        self.afterSetUp()
+    
+
+class ZTCLayer(TestCaseLayer, ZopeTestCase):
     """ZopeTestCase as a sandboxed layer."""
     pass
 
 ztc_layer = ZTCLayer()
 
 
-class PTCLayer(TestCaseLayer, ZopeTestCase.PortalTestCase):
+class PortalTestCase(ztc.PortalTestCase):
+
+    def setUp(self):
+        """Let layer tear down do cleanup and logout after setup."""
+        self.beforeSetUp()
+        self.app = self._app()
+        self.portal = self._portal()
+        self._setup()
+        self.logout()
+        self.afterSetUp()
+
+
+class PTCLayer(TestCaseLayer, PortalTestCase):
     """PortalTestCase as a sandboxed layer."""
     pass
 
@@ -43,18 +66,9 @@ class BaseZTCLayerMixin(object):
 
     _setup_fixture = False
 
-    def setUp(self):
-        """Let layer tear down do cleanup and logout after setup."""
-        self.beforeSetUp()
-        self.app = self._app()
-        self._setup()
-        self.logout()
-        self.afterSetUp()
-        return super(BaseZTCLayerMixin, self).setUp()
-
     @property
     def folder(self):
-        return getattr(self.app, ZopeTestCase.folder_name)
+        return getattr(self.app, ztc.folder_name)
 
 
 class BasePTCLayerMixin(object):
@@ -62,19 +76,9 @@ class BasePTCLayerMixin(object):
 
     _configure_portal = False
 
-    def setUp(self):
-        """Let layer tear down do cleanup and logout after setup."""
-        self.beforeSetUp()
-        self.app = self._app()
-        self.portal = self._portal()
-        self._setup()
-        self.afterSetUp()
-        return super(BasePTCLayerMixin, self).setUp()
-
     @property
     def folder(self):
-        return self.portal.portal_membership.getHomeFolder(
-            ZopeTestCase.user_name)
+        return self.portal.portal_membership.getHomeFolder(ztc.user_name)
 
 
 class BaseZTCLayer(BaseZTCLayerMixin, ZTCLayer):
