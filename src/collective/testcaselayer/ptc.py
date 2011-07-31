@@ -8,7 +8,14 @@ ptc.setupPloneSite()
 
 class PTCLayer(ztc.TestCaseLayer, ptc.PloneTestCase):
     """PloneTestCase as a sandboxed layer."""
-    pass
+
+    def loadZCML(self, file_, **kw):
+        ptc.setup._placefulTearDown()
+        try:
+            super(PTCLayer, self).loadZCML(file_, **kw)
+        finally:
+            ptc.setup._placefulSetUp(self.portal)
+            pass
 
 ptc_layer = PTCLayer([layer.PloneSite])
 
