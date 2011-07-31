@@ -6,7 +6,11 @@ from collective.testcaselayer import ztc
 ptc.setupPloneSite()
 
 
-class PTCLayer(ztc.TestCaseLayer, ptc.PloneTestCase):
+class PloneTestCase(ptc.PloneTestCase, ztc.PortalTestCase):
+    setUp = ztc.PortalTestCase.setUp
+    
+    
+class PTCLayer(ztc.TestCaseLayer, PloneTestCase):
     """PloneTestCase as a sandboxed layer."""
 
     def loadZCML(self, file_, **kw):
