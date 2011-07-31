@@ -45,15 +45,12 @@ class BaseZTCLayerMixin(object):
 
     def setUp(self):
         """Let layer tear down do cleanup and logout after setup."""
-        result = super(BaseZTCLayerMixin, self).setUp()
-
         self.beforeSetUp()
         self.app = self._app()
         self._setup()
         self.logout()
         self.afterSetUp()
-
-        return result
+        return super(BaseZTCLayerMixin, self).setUp()
 
     @property
     def folder(self):
@@ -67,15 +64,12 @@ class BasePTCLayerMixin(object):
 
     def setUp(self):
         """Let layer tear down do cleanup and logout after setup."""
-        result = super(BasePTCLayerMixin, self).setUp()
-
         self.beforeSetUp()
         self.app = self._app()
         self.portal = self._portal()
         self._setup()
         self.afterSetUp()
-
-        return result
+        return super(BasePTCLayerMixin, self).setUp()
 
     @property
     def folder(self):
