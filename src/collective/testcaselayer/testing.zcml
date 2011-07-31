@@ -16,7 +16,6 @@
      class="ZPublisher.HTTPResponse.HTTPResponse"
      original="setBody"
      replacement=".functional.setBody"
-     handler=".functional.applyPatch"
      docstringWarning="false" />
   
   <monkey:patch

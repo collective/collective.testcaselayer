@@ -3,10 +3,14 @@ import transaction
 
 from zope.interface.interfaces import IInterface
 from ZPublisher.Iterators import IStreamIterator
+from ZPublisher import HTTPResponse
+
 from Testing.ZopeTestCase.functional import savestate
 from Testing.ZopeTestCase.zopedoctest import functional
 
 orig_outstream_init = functional.DocResponseWrapper.__init__
+original_setBody = HTTPResponse.HTTPResponse.setBody
+
 
 
 def outstream_init(self, response, outstream, path, header_output):
@@ -23,12 +27,7 @@ def setBody(self, body, *args, **kw):
         stream = IStreamIterator.isImplementedBy(body)
     if stream:
         body = ''.join(body)    # read from iterator
-    return self._original_setBody(body, *args, **kw)
-
-
-def applyPatch(scope, original, replacement):
-    setattr(scope, '_original_' + original, getattr(scope, original))
-    setattr(scope, original, replacement)
+    return original_setBody(self, body, *args, **kw)
 
 
 @savestate
