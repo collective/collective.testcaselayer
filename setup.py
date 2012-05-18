@@ -13,6 +13,7 @@ setup(name='collective.testcaselayer',
       long_description='\n'.join(
           open(os.path.join(*path)).read() for path in [
               ("README.rst",),
+              src_path + ("README.rst",),
               src_path + ("common.rst",),
               src_path + ("mail.rst",),
               src_path + ("ptc.rst",),

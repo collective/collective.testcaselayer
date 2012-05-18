@@ -18,19 +18,19 @@ optionflags = (doctest.NORMALIZE_WHITESPACE |
 
 def test_suite():
     doc_suite = doctest.DocFileSuite(
-        'README.txt',
-        'layer.txt',
-        'sandbox.txt',
-        'ztc.txt',
-        'ctc.txt',
-        'ptc.txt',
+        'README.rst',
+        'layer.rst',
+        'sandbox.rst',
+        'ztc.rst',
+        'ctc.rst',
+        'ptc.rst',
         optionflags=optionflags)
     func_suite = functional.FunctionalDocFileSuite(
-        'functional.txt',
+        'functional.rst',
         optionflags=optionflags)
     mail_suite = functional.FunctionalDocFileSuite(
-        'mail.txt',
-        'common.txt',
+        'mail.rst',
+        'common.rst',
         optionflags=optionflags,
         test_class=ptc.FunctionalTestCase)
     mail_suite.layer = mail.mockmailhost_layer
