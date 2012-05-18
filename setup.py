@@ -12,16 +12,16 @@ setup(name='collective.testcaselayer',
       description="Use test cases as zope.testing layers",
       long_description='\n'.join(
           open(os.path.join(*path)).read() for path in [
-              src_path + ("README.txt",),
-              src_path + ("common.txt",),
-              src_path + ("mail.txt",),
-              src_path + ("ptc.txt",),
-              src_path + ("ztc.txt",),
-              src_path + ("layer.txt",),
-              src_path + ("sandbox.txt",),
-              src_path + ("functional.txt",),
-              ("docs", "HISTORY.txt"),
-              ("docs", "TODO.txt")
+              ("README.rst",),
+              src_path + ("common.rst",),
+              src_path + ("mail.rst",),
+              src_path + ("ptc.rst",),
+              src_path + ("ztc.rst",),
+              src_path + ("layer.rst",),
+              src_path + ("sandbox.rst",),
+              src_path + ("functional.rst",),
+              ("docs", "HISTORY.rst"),
+              ("docs", "TODO.rst")
               ]),
       # Get more strings from
       # http://www.python.org/pypi?%3Aaction=list_classifiers
