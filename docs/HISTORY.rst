@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.5 - Unreleased
+1.5 - 2012-05-18
 ----------------
 
 * Plone 4.1 compatibility.
