@@ -20,6 +20,8 @@ class CommonPTCLayer(ptc.BasePTCLayer):
         # inspect CSS, JavaScript, and KSS
         self.portal.portal_css.setDebugMode(True)
         self.portal.portal_javascripts.setDebugMode(True)
-        self.portal.portal_kss.setDebugMode(True)
+        portal_kss = self.portal.get('portal_kss')
+        if portal_kss is not None:
+            portal_kss.setDebugMode(True)
 
 common_layer = CommonPTCLayer([mail.mockmailhost_layer])

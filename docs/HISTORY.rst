@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.6 - unreleased
+----------------
+
+* Don't break if the portal has no portal_kss tool.
+  [davisagli]
+
 1.5 - 2012-05-18
 ----------------
 

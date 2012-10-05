@@ -17,7 +17,7 @@ error_log and the resource registries are not in debug mode.
     False
     >>> portal.portal_javascripts.getDebugMode()
     False
-    >>> portal.portal_kss.getDebugMode()
+    >>> 'portal_kss' in portal and portal.portal_kss.getDebugMode() or False
     False
 
 Set up the common_layer.
@@ -53,5 +53,5 @@ registries are in debug mode.
     True
     >>> portal.portal_javascripts.getDebugMode()
     True
-    >>> portal.portal_kss.getDebugMode()
+    >>> 'portal_kss' in portal and portal.portal_kss.getDebugMode() or True
     True
