@@ -8,8 +8,8 @@ ptc.setupPloneSite()
 
 class PloneTestCase(ptc.PloneTestCase, ztc.PortalTestCase):
     setUp = ztc.PortalTestCase.setUp
-    
-    
+
+
 class PTCLayer(ztc.TestCaseLayer, PloneTestCase):
     """PloneTestCase as a sandboxed layer."""
 

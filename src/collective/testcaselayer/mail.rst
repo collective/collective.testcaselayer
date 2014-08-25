@@ -19,7 +19,7 @@ Send a message.
     ... From: foo@foo.com
     ... To: bar@foo.com
     ... Subject: Foo message subject
-    ... 
+    ...
     ... Foo message body
     ... """)
 
@@ -35,7 +35,7 @@ removed from the list.
     From: foo@foo.com
     To: bar@foo.com
     Subject: Foo message subject
-    Date: ...    
+    Date: ...
     Foo message body
     >>> len(portal.MailHost)
     0
@@ -48,7 +48,7 @@ the wild.
     ... From: foo@foo.com
     ... To: bar@foo.com
     ... Subject: Qux message subject
-    ... 
+    ...
     ... Qux message body
     ... """, 'bar@foo.com', 'foo@foo.com',
     ...     subject='Qux message subject')

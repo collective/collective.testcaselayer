@@ -2,7 +2,7 @@
    xmlns="http://namespaces.zope.org/zope"
    xmlns:monkey="http://namespaces.plone.org/monkey"
    i18n_domain="collective.testcaselayer">
-  
+
   <include package="collective.monkeypatcher" file="meta.zcml" />
 
   <monkey:patch
@@ -17,12 +17,12 @@
      original="setBody"
      replacement=".functional.setBody"
      docstringWarning="false" />
-  
+
   <monkey:patch
      module="Testing.ZopeTestCase.zopedoctest.functional"
      original="http"
      replacement=".functional.http"
      docstringWarning="False"
      />
-  
+
 </configure>

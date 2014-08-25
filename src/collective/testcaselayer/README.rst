@@ -51,21 +51,21 @@ mode enabled:
 You could use a collective.foo.testing module like this:
 
     >>> from Products.PloneTestCase import ptc
-    >>> 
+    >>>
     >>> from collective.testcaselayer import ptc as tcl_ptc
     >>> from collective.testcaselayer import common
-    >>> 
+    >>>
     >>> class Layer(tcl_ptc.BasePTCLayer):
     ...     """Install collective.foo"""
-    ... 
+    ...
     ...     def afterSetUp(self):
     ...         ZopeTestCase.installPackage('collective.foo')
-    ...         
+    ...
     ...         from collective.foo import tests
     ...         self.loadZCML('testing.zcml', package=tests)
-    ...         
+    ...
     ...         self.addProfile('collective.foo:default')
-    >>> 
+    >>>
     >>> layer = Layer([common.common_layer])
 
 To use this layer in a README.txt doctest, you could use a
@@ -73,16 +73,16 @@ collective.foo.tests module like this:
 
     >>> import unittest
     >>> import doctest
-    >>> 
+    >>>
     >>> from Testing import ZopeTestCase
     >>> from Products.PloneTestCase import ptc
     >>>
     >>> from collective.foo import testing
-    >>> 
+    >>>
     >>> optionflags = (doctest.NORMALIZE_WHITESPACE|
     ...                doctest.ELLIPSIS|
     ...                doctest.REPORT_NDIFF)
-    >>> 
+    >>>
     >>> def test_suite():
     ...     suite = ZopeTestCase.FunctionalDocFileSuite(
     ...         'README.txt',
@@ -90,7 +90,7 @@ collective.foo.tests module like this:
     ...         test_class=ptc.FunctionalTestCase)
     ...     suite.layer = testing.layer
     ...     return suite
-    >>> 
+    >>>
     >>> if __name__ == '__main__':
     ...     unittest.main(defaultTest='test_suite')
 

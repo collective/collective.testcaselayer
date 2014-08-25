@@ -33,7 +33,7 @@ class ZopeTestCase(ztc.ZopeTestCase):
         self._setup()
         self.logout()
         self.afterSetUp()
-    
+
 
 class ZTCLayer(TestCaseLayer, ZopeTestCase):
     """ZopeTestCase as a sandboxed layer."""

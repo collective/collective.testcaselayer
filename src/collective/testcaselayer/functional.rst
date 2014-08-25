@@ -32,7 +32,7 @@ Due to `bug #98437 <https://bugs.launchpad.net/bugs/98437>`_,
 "TestBrowser Referer: header set to 'localhost'", some testbrowser
 requests would raise NotFound.  Two examples would be visiting the
 Plone login_form directly rather than following a link, or using the
-Plone content_status_history form.    
+Plone content_status_history form.
 
 Test the Patches
 ----------------
