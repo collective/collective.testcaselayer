@@ -1,0 +1,5 @@
+*.pyc
+*.pyo
+/src/collective.testcaselayer.egg-info/
+/dist/
+
