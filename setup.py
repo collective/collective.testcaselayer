@@ -21,7 +21,7 @@ setup(name='collective.testcaselayer',
               src_path + ("layer.rst",),
               src_path + ("sandbox.rst",),
               src_path + ("functional.rst",),
-              ("docs", "HISTORY.rst"),
+              ("CHANGES.rst",),
               ("docs", "TODO.rst")
               ]),
       # Get more strings from
