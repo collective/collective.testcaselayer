@@ -4,7 +4,8 @@ Changelog
 1.6.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Minor cleanup: whitespace, git ignores, setup.py.
+  [gforcada, rnix, maurits]
 
 
 1.6 (2012-10-17)
